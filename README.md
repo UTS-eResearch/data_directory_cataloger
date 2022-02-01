@@ -1,10 +1,10 @@
-README 
+# README 
 
 This is the data directory checker. The purpose of it is to help manage 
 numerous directories by having a README.yaml in most directories and which 
 stores metadata about the contents of that directory.
 
-# Example for Testing
+## Example for Testing
 
 On Mikes laptop:
 
@@ -14,7 +14,7 @@ On Mikes laptop:
 
 The `styles.css` file is optional.
 
-# Data Management Plan Notes
+## Data Management Plan Notes
 
 Typical Data Management Plan fields might include:
 
