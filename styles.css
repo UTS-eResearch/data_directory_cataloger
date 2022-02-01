@@ -1,0 +1,40 @@
+body {
+  margin: 10px;
+  padding: 0;
+}
+
+h1, h2 { font-family: Arial, Helvetica, sans-serif; }
+
+code { font-size: 130%; }
+
+pre {
+  font-size: 90%;
+  width: 80%;
+  margin: 4ex;
+  padding: 2ex;
+  background-color: #fcf3cf;
+}
+
+table {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #666666;
+    border-collapse: collapse;
+}
+
+table th {
+    padding: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+}
+
+table td {
+    padding: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+}
+
