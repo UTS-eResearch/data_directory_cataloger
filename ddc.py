@@ -236,6 +236,10 @@ def main():
             print(' -', path)
 
     print('\nFound %d %s files under %s\n' % (len(found), readme, basedir))
+    if len(found) == 0:
+        print('Exiting.')
+        sys.exit()
+
     #print('\nFound a %s file in the following directories:\n' % readme)
     #for path in found:
     #    print(' -', path)
