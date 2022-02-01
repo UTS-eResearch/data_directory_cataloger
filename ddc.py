@@ -256,7 +256,7 @@ def main():
     # that should be in each README.
     # Place in this list the keys that you wish to print out. 
     # Capitisation is important. They have to match the keys in your YAML structure.
-    columns = ['Directory', 'Title', 'Description', 'Data Manager', 'Data manager']
+    columns = ['Directory', 'Title', 'Description', 'Data Manager']
     create_markdown_table(columns, data)
     
     print('\nThis file created on %s' % timenow)
