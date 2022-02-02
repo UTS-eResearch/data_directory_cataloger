@@ -152,8 +152,6 @@ def check_metadata(data):
             print('    Possibly missing: ', end='')
             l = ['"%s"' % item for item in (metadata - this_set)]
             print('` %s `' % ', '.join(l))
-        else:
-            print('Probably all are OK.')
 
 def create_markdown_header(timenow):
 
