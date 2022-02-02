@@ -124,7 +124,7 @@ def check_metadata(data):
         # we are effectively adding this latest set to the final metadata set.
         metadata = metadata | this_set
 
-    print('The following are all the %d metadata attributes found in those %s files.' \
+    print('\nThe following are all the %d metadata attributes found in the %s files.' \
         % (len(metadata), readme))
     print('These should all be unique. If not edit and correct the %s files.' % readme)
     print('')
@@ -241,7 +241,7 @@ def main():
         for path in missing: 
             print(' -', path)
 
-    print('\nFound %d %s files under %s\n' % (len(found), readme, basedir))
+    print('\nFound %d %s files under %s    ' % (len(found), readme, basedir))
     if len(found) == 0:
         print('Exiting.')
         sys.exit()
@@ -253,10 +253,7 @@ def main():
     # Parsing these README YAML docs.
     data = parse_readmes(found)
 
-    # Check the metadata in these READMEs for consistency.
-    check_metadata(data)
-
-    print('\nSummary of %s files in each sub-directory:' % readme)
+    print('Summary of %s files in each sub-directory:' % readme)
     # TODO how can users easily specify the columns to print?  Maybe a ddc.conf file?
     # This might be a ddc.yaml that contains the keys and the definition of each key 
     # that should be in each README.
@@ -264,6 +261,10 @@ def main():
     # Capitisation is important. They have to match the keys in your YAML structure.
     columns = ['Directory', 'Title', 'Description', 'Data Manager']
     create_markdown_table(columns, data)
+
+    # Check the metadata in these READMEs for consistency.
+    print('\n## Supplementary Information')
+    check_metadata(data)
     
     print('\nThis file created on %s' % timenow)
 
