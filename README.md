@@ -4,14 +4,15 @@ This is the data directory checker. The purpose of it is to help manage
 numerous directories by having a README.yaml in most directories and which 
 stores metadata about the contents of that directory.
 
-When the program is run on top level directory it looks for the README.yaml files, 
-reads the metadata, and creates single Markdown file summarising the READMEs.
+When the program is run on a top level directory it looks for README.yaml files in
+the immediate sub-directories. From those README files it reads the metadata, and 
+creates a single Markdown file summarising the metadata in the READMEs.
 This Markdown doc can then be easily transformed to a HTML file (e.g. using pandoc) 
 which will provide a single point of information about the contents of the directories.
 
 Also System Administrators can look in the directory and find the file which
 describes the data and who maintains it. The README.yaml files can be programatically 
-searched for data such as the maintainer or data disposal dates.
+searched for metadata such as the maintainer or data disposal dates.
 
 ## What a README.yaml Looks Like
 
