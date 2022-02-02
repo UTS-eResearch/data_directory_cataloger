@@ -170,6 +170,9 @@ date: %s
 def create_markdown_table(columns, data):
     '''
     This takes a list of the keys to print out and the YAML data. 
+    The columns is a list and might be like this: ['Title', 'Description', 'Data Manager']
+    The data is a dictionary of all the YAML docs keyed by their path.
+    The final Markdown doc summarising this would be like this:
 
     | Title | Description |
     | ----- | ----------- |
@@ -194,10 +197,15 @@ def create_markdown_table(columns, data):
     # Print the data.
     for key in data.keys():
         doc = data[key]
-        # The user has specified the columns but they may have mis-spelled or included 
-        # a column name that does not exist for some README so we use the get method 
-        # which can supply a missing value. Otherwise one would use `if col not in doc`.
-        l = [ doc.get(col, 'MISSING') for col in columns ]
+        l = []
+        for col in columns:
+            if col not in doc:
+                # This doc is missing this key.
+                doc[col] = '' 
+            if not doc[col]:
+                # This doc has the key but its missing a value.
+                doc[col] = '' 
+            l.append(doc[col])
         print('| ', end='') 
         print(' | '.join(l), end='')
         print(' |') 
