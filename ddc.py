@@ -35,10 +35,10 @@ import yaml, datetime
 def parse_args():
 
     parser = argparse.ArgumentParser( \
-        description='Program to check all %s docs under a directory.' % readme)
+        description='Program to catalog all %s docs under a directory.' % readme)
 
     # Mandatory arguments.
-    parser.add_argument('directory', help='The directory to check.')
+    parser.add_argument('directory', help='The directory to catalog.')
 
     # Optional arguments. None
 
