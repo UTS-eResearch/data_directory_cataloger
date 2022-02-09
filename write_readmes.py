@@ -2,8 +2,11 @@
 
 '''
 This creates README.yaml files in all the first level subdirectories under a base directory.
-This program just takes one input arg, a base directory path. 
+Existing README.yaml are not overwritten.
+
+This program just takes one input arg, the base directory path.
 The output is a list of the README.yaml files found and/or created.
+
 To change the contents of the README.yaml you will need to edit this script.
 '''
     
