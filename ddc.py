@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 '''
-This is the data directory checker. The purpose of it is to help manage 
+This is the data directory cataloger. The purpose of it is to help manage 
 numerous directories by having a README.yaml in most directories and which 
 stores metadata about the contents of that directory.
 
@@ -23,9 +23,10 @@ Date: 2022.01.25
 To get help for using the program just run: ./ddc.py -h 
 '''
     
-# Filename of the README in each directory that contains the directory information.
-# This filename is not likely to clash with other READMEs in any directory.
-# If you change this here you should also change the references in the comments and doc strings.
+# Filename of the README in each directory that contains the directory meta information.
+# This does not need to be literally "README.yaml". It just needs to not clash with other filename 
+# in the directory that you are processing. Example, if you don't want to use README.yaml then you 
+# might use CATALOG.yaml. 
 readme='README.yaml'
 
 import argparse, os, sys

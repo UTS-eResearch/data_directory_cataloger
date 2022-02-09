@@ -1,6 +1,6 @@
 # README 
 
-This is the data directory checker. The purpose of it is to help manage 
+This is the data directory cataloger. The purpose of it is to help manage 
 numerous directories by having a README.yaml in most directories and which 
 stores metadata about the contents of that directory.
 
