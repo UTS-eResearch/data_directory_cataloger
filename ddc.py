@@ -227,7 +227,7 @@ def main():
     timenow = datetime.datetime.now().strftime('%Y-%m-%d at %I:%M %p')
     
     create_markdown_header(timenow)
-    print('# `%s` Files Under Directory `%s`' % (readme, basedir))
+    print('# Directory `%s`' % basedir)
 
     # The "data" variable is a dictionary. It's keys will be the README.yaml 
     # file paths and the values are the YAML structures for that README.yaml  
