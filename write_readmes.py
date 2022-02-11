@@ -2,10 +2,13 @@
 
 '''
 This creates README.yaml files in all the first level subdirectories under a base directory.
-Existing README.yaml are not overwritten.
+Any existing README.yaml files are not overwritten.
 
+Usage: 
 This program just takes one input arg, the base directory path.
 The output is a list of the README.yaml files found and/or created.
+
+    ./write_readmes.py base_directory
 
 To change the contents of the README.yaml you will need to edit this script.
 '''
@@ -57,7 +60,8 @@ Data Location: %s
 def main():
 
     if len(sys.argv) != 2:
-        print('Needs a directory as an arg. Exiting.')
+        print("Usage: ", sys.argv[0],  "base_directory")
+        print('Needs a base directory as an arg. Exiting.')
         sys.exit()
     else:
         basedir = sys.argv[1]
