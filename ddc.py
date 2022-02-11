@@ -238,11 +238,13 @@ def main():
 
     # Print some info to the user on what was found or otherwise.
     if len(missing) != 0:
+        print('\n## Warnings\n')
         print('\nThe following subdirectories are missing a %s file:\n' % readme)
         for path in missing: 
             print(' -', path)
 
-    print('\nFound %d %s files under %s    ' % (len(found), readme, basedir))
+    print('\n## Summary\n')
+    print('\nFound %d `%s` files in the directories under `%s`.' % (len(found), readme, basedir))
     if len(found) == 0:
         print('Exiting.')
         sys.exit()
@@ -254,7 +256,7 @@ def main():
     # Parsing these README YAML docs.
     data = parse_readmes(found)
 
-    print('Summary of %s files in each sub-directory:' % readme)
+    print('A summary of the metadata in these files follows.')
     # TODO how can users easily specify the columns to print?  Maybe a ddc.conf file?
     # This might be a ddc.yaml that contains the keys and the definition of each key 
     # that should be in each README.
