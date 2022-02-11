@@ -269,7 +269,7 @@ def main():
     print('\n## Supplementary Information')
     check_metadata(data)
     
-    print('\nThis file created on %s' % timenow)
+    print('\nThis page last updated on %s' % timenow)
 
 if __name__ == '__main__':
     main()
