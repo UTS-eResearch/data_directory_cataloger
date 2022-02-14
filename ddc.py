@@ -1,32 +1,32 @@
 #!/usr/bin/env python3
 
 '''
-This is the data directory cataloger. The purpose of it is to help manage 
-numerous directories by having a README.yaml in most directories and which 
+This is the data directory cataloger. The purpose of it is to help manage
+numerous directories by having a README.yaml in most directories and which
 stores metadata about the contents of that directory.
 
-This program expects a "base" directory as input. 
+This program expects a "base" directory as input.
 
 Under this base directory it then looks for subdirectories, but only ONE level down.
-In each first level subdirectory it looks for the README.yaml file that should describe 
+In each first level subdirectory it looks for the README.yaml file that should describe
 the data under that subdirectory.
 
-Once it has found the README.yaml file it parses that file, and appends the metadata 
-to a Markdown document summarising the metadata in the READMEs. 
+Once it has found the README.yaml file it parses that file, and appends the metadata
+to a Markdown document summarising the metadata in the READMEs.
 
-This Markdown doc is just printed to standard output so it can be viewed or redirected 
+This Markdown doc is just printed to standard output so it can be viewed or redirected
 to an output file. The output file can be converted to a HTML file using pandoc.
 
 Author: Mike Lake
 Date: 2022.01.25
 
-To get help for using the program just run: ./ddc.py -h 
+To get help for using the program just run: ./ddc.py -h
 '''
-    
+
 # Filename of the README in each directory that contains the directory meta information.
-# This does not need to be literally "README.yaml". It just needs to not clash with other filename 
-# in the directory that you are processing. Example, if you don't want to use README.yaml then you 
-# might use CATALOG.yaml. 
+# This does not need to be literally "README.yaml". It just needs to not clash with other filename
+# in the directory that you are processing. Example, if you don't want to use README.yaml then you
+# might use CATALOG.yaml.
 readme='README.yaml'
 
 import argparse, os, sys
@@ -48,7 +48,7 @@ def parse_args():
 def get_readmes(basedir):
     '''
     Given a base directory return two lists:
-    1. A found list of all directory paths that have a README.yaml 
+    1. A found list of all directory paths that have a README.yaml
     2. A missing list of directory paths that do not have a README.yaml
     They are sorted alphabetically for the convenience of the user.
     '''
@@ -59,14 +59,14 @@ def get_readmes(basedir):
     # scandir returns an iterator of DirEntry objects for the given path.
     subdirs = [ f.path for f in os.scandir(basedir) if f.is_dir() ]
 
-    for dir in subdirs: 
+    for dir in subdirs:
         # Append the path to the directory to either the found list or the
         # missing list, depending on whether the README was found or not.
         if os.path.isfile(os.path.join(dir, readme)):
             found.append(dir)
         else:
             missing.append(dir)
-   
+
     # Sort alphabetically.
     found.sort()
     missing.sort()
@@ -98,9 +98,10 @@ def parse_readmes(found):
         #print(yaml.dump(doc, default_flow_style=False, sort_keys=False))
         #print(doc.keys())
 
+        # UPTO
         # Here we add the current "dir" to this YAML doc so that we will have
         # this info when we print out the Markdown table.
-        doc['Directory'] = dir
+        #doc['Directory'] = dir
 
         # Add this YAML doc to the data dictionary with the directory path as the key.
         data[dir] = doc
@@ -111,18 +112,18 @@ def check_metadata(data):
     '''
     All the READMEs should have the same metadata keys.
     But we should allow one or more to have missing keys.
-    Here we print out the keys. 
+    Here we print out the keys.
     The number of keys should be the same.
     '''
 
-    # This set starts off as empty but will, at the end of the loop, contain 
-    # the complete set of all metadata values from all the README.yam files. 
+    # This set starts off as empty but will, at the end of the loop, contain
+    # the complete set of all metadata values from all the README.yam files.
     metadata = set()
 
     for directory in data.keys():
         doc = data[directory]
         this_set = set(doc.keys())
-        # The | operator gives the union of the two sets. By doing a union of sets 
+        # The | operator gives the union of the two sets. By doing a union of sets
         # we are effectively adding this latest set to the final metadata set.
         metadata = metadata | this_set
 
@@ -133,15 +134,15 @@ def check_metadata(data):
     [print(' -', item) for item in sorted(metadata)]
 
     # Now that we have a metadata set containing all the metadata values that are
-    # present in the README.yam files we can check if any READMEs are missing any 
+    # present in the README.yam files we can check if any READMEs are missing any
     # metadata values.
 
-    print('\nChecking each %s file against the metadata list above ...\n' % readme) 
+    print('\nChecking each %s file against the metadata list above ...\n' % readme)
     for directory in data.keys():
         doc = data[directory]
         this_set = set(doc.keys())
         if len(doc) != len(metadata):
-            # Note: The set difference used below isn’t commutative! 
+            # Note: The set difference used below isn’t commutative!
             print(' -', os.path.join(directory, readme), '    ')
 
             # Alternatives to printing the set differences.
@@ -158,59 +159,69 @@ def check_metadata(data):
 def create_markdown_header(timenow):
 
     # Valid Markdown docs have some metadata at the top. Set that here.
-    # Note we use a backslash here to suppress the leading newline 
+    # Note we use a backslash here to suppress the leading newline
     # as we do not want that in the Markdown.
     metadata = '''\
 ---
 pagetitle: %s
 creator: %s
 date: %s
----''' % ('Data Directory Check', sys.argv[0], timenow)
+---''' % ('Data Directory Cataloger', sys.argv[0], timenow)
 
     print(metadata)
 
 def create_markdown_table(columns, data):
     '''
-    This takes a list of the keys to print out and the YAML data. 
+    This takes a list of the keys to print out and the YAML data.
     The columns is a list and might be like this: ['Title', 'Description', 'Data Manager']
     The data is a dictionary of all the YAML docs keyed by their path.
     The final Markdown doc summarising this would be like this:
 
-    | Title | Description |
-    | ----- | ----------- |
-    | HPC Job Examples for PBS Job Arrays | some description |
-    | HPC Job Examples for Checkpointing  | "                |
-    | HPC Job Examples for MPI            | "                |
+    | Directory | Title | Description | Data Manager |
+    | --------- | ----- | ----------- | ------------ |
+    | examples/arrays        | Job Examples for PBS Job Arrays | some description | Mike Lake |
+    | examples/checkpointing | Job Examples for Checkpointing  | "                | Mike Lake |
+    | examples/mpi           | Job Examples for MPI            | "                | Mike Lake |
     '''
 
-    print('') 
+    # The first column in the Markdown table will always be the directory of the README YAML
+    # file and the subsequent colums will be the keys in found in the the README YAML file.
+    columns.insert(0, 'Directory')
+
+    print('') # We need a blank line before the Markdown.table.
 
     # Print the Markdown header from the keys.
-    print('| ', end='') 
+    # e.g. | Directory | Title | Description | Data Manager |
+    print('| ', end='')
     print(' | '.join(columns), end='')
-    print(' |') 
+    print(' |')
 
     # Print the underlining for the header above.
+    # e.g. | ----- | ----------- | ------------ |
     l = [ '-' * len(col) for col in columns ]
-    print('| ', end='') 
+    print('| ', end='')
     print(' | '.join(l), end='')
-    print(' |') 
+    print(' |')
 
     # Print the data.
     for key in data.keys():
         doc = data[key]
+        # Remember that 'Directory' is the first in our list of columns to print
+        # and the value of this is the key in the data dictionary. But the actual
+        # docs don't contain a value for this so we add this now.
+        doc['Directory'] = key
         l = []
         for col in columns:
             if col not in doc:
                 # This doc is missing this key.
-                doc[col] = '' 
+                doc[col] = ''
             if not doc[col]:
                 # This doc has the key but its missing a value.
-                doc[col] = '' 
+                doc[col] = ''
             l.append(doc[col])
-        print('| ', end='') 
+        print('| ', end='')
         print(' | '.join(l), end='')
-        print(' |') 
+        print(' |')
 
 def main():
 
@@ -223,25 +234,25 @@ def main():
         print('Error: you must supply a directory, %s is not a directory.' % basedir)
         print('For help run: %s -h' % sys.argv[0])
         sys.exit()
-    
+
     # Get the time and todays date.
     timenow = datetime.datetime.now().strftime('%Y-%m-%d at %I:%M %p')
-    
+
     create_markdown_header(timenow)
     print('# Directory `%s`' % basedir)
 
-    # The "data" variable is a dictionary. It's keys will be the README.yaml 
-    # file paths and the values are the YAML structures for that README.yaml  
+    # The "data" variable is a dictionary. It's keys will be the README.yaml
+    # file paths and the values are the YAML structures for that README.yaml
     data = {}
 
-    # Get all the READMEs under the base directory. 
+    # Get all the READMEs under the base directory.
     (found, missing) = get_readmes(basedir)
 
     # Print some info to the user on what was found or otherwise.
     if len(missing) != 0:
         print('\n## Warnings\n')
         print('\nThe following subdirectories are missing a %s file:\n' % readme)
-        for path in missing: 
+        for path in missing:
             print(' -', path)
 
     print('\n## Summary\n')
@@ -254,15 +265,15 @@ def main():
     data = parse_readmes(found)
 
     print('A summary of the metadata in these files follows.')
-    # Place in this list the keys that you wish to print out. 
+    # Place in this list the keys that you wish to print out.
     # Capitisation is important. They have to match the keys in your README YAML files.
-    columns = ['Directory', 'Title', 'Description', 'Data Manager']
+    columns = ['Title', 'Description', 'Data Manager']
     create_markdown_table(columns, data)
 
     # Check the metadata in these READMEs for consistency.
     print('\n## Supplementary Information')
     check_metadata(data)
-    
+
     print('\nThis page last updated on %s' % timenow)
 
 if __name__ == '__main__':
