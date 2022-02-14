@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 '''
-This is the data directory cataloger. The purpose of it is to help manage
-numerous directories by having a README.yaml in most directories and which
-stores metadata about the contents of that directory.
+This is the Data Directory Cataloger. The purpose of it is to help manage numerous
+directories of data by having a README.yaml in most directories and which stores
+metadata about the contents of that directory.
 
 This program expects a "base" directory as input.
 
@@ -17,10 +17,23 @@ to a Markdown document summarising the metadata in the READMEs.
 This Markdown doc is just printed to standard output so it can be viewed or redirected
 to an output file. The output file can be converted to a HTML file using pandoc.
 
-Author: Mike Lake
-Date: 2022.01.25
-
 To get help for using the program just run: ./ddc.py -h
+
+License
+
+Data Directory Cataloger is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later version.
+
+Data Directory Cataloger is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+details.
+
+You should have received a copy of the GNU General Public License along with Foobar. 
+If not, see <https://www.gnu.org/licenses/>. 
+
+Copyright 2022 Mike Lake
 '''
 
 # Filename of the README in each directory that contains the directory meta information.
