@@ -258,11 +258,8 @@ def main():
     data = parse_readmes(found)
 
     print('A summary of the metadata in these files follows.')
-    # TODO how can users easily specify the columns to print?  Maybe a ddc.conf file?
-    # This might be a ddc.yaml that contains the keys and the definition of each key 
-    # that should be in each README.
     # Place in this list the keys that you wish to print out. 
-    # Capitisation is important. They have to match the keys in your YAML structure.
+    # Capitisation is important. They have to match the keys in your README YAML files.
     columns = ['Directory', 'Title', 'Description', 'Data Manager']
     create_markdown_table(columns, data)
 
