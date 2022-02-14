@@ -86,6 +86,19 @@ Python 4 or later.
 > - The static web pages are still likely to be readable with any HTML browser even if they are not
 >   being served by a web server.
 
+## License
+
+Data Directory Cataloger is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free Software 
+Foundation, either version 3 of the License, or (at your option) any later version.
+
+Data Directory Cataloger is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+details.
+
+You should have received a copy of the GNU General Public License along with
+Data Directory Cataloger. If not, see http://www.gnu.org/licenses/.
 
 Mike Lake     
 January 2022
