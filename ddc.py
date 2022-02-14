@@ -250,10 +250,6 @@ def main():
         print('Exiting.')
         sys.exit()
 
-    #print('\nFound a %s file in the following directories:\n' % readme)
-    #for path in found:
-    #    print(' -', path)
-
     # Parsing these README YAML docs.
     data = parse_readmes(found)
 
