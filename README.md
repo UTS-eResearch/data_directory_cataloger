@@ -6,14 +6,14 @@ stores metadata about the contents of that directory. Typical metadata that
 you would store might be "Description", "Data Manager" and "Disposal Date".
 
 When the program is run on a top level directory it looks for README.yaml files in
-the immediate sub-directories. From those README files it reads the metadata, and
-creates a single Markdown file summarising the metadata in the READMEs.
+the **immediate** sub-directories. From those README.yaml files it reads the metadata, and
+outputs a single Markdown document summarising the metadata in the READMEs.
 This Markdown doc can then be easily transformed to a HTML file (e.g. using pandoc)
 which will provide a single point of information about the contents of the directories.
 
 Also System Administrators can look in the directory and find the file which
-describes the data and who maintains it. The README.yaml files can be programatically
-searched for metadata such as the maintainer or data disposal dates.
+describes the data and who manages it. The README.yaml files can be programatically
+searched for metadata such as the data manager or data disposal dates.
 
 ## What a README.yaml Looks Like
 
@@ -58,7 +58,7 @@ Why does this script not recurse? It only looks for README.yaml files in the imm
 > The purpose of this script is to manage large amounts of data. There might be
 > hundreds or thousands of directories. The directories might contain millions of files.
 > We don't want to unexpectantly find that this script takes hours to run and is
-> consuming lots of I/O bandwidth. If you wish to run this script of many
+> consuming lots of I/O bandwidth. If you wish to run this script on many
 > subdirectories you can write a bash script to do this.
 
 What use plain text README.yaml files? A database is faster.
@@ -72,15 +72,15 @@ What happens if this script can no longer run? Python changes and this script mi
 Python 4 or later.
 
 > If you cannot run this script anymore nothing really breaks.
-> Future researchers or data maintainers will see be able to find and understand the data's
+> Future researchers or data managers will see be able to find and understand the data's
 > metadata because:
 >
-> - The README YAML files will still remain with the data in their directories.
+> - The README.yaml files will still remain with the data in their directories.
 > - The generated markdown files will readable.
 > - The static web pages are still likely to be readable with any HTML browser even if they are not
 >   being served by a web server.
 
 
-Mike Lake
+Mike Lake     
 January 2022
 
