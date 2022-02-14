@@ -51,6 +51,12 @@ Run the program and save the Markdown output, then convert to a HTML page:
 
 The `styles.css` file is optional.
 
+Of course most users will have many directories to manage. A better option is to
+run a bash script that runs this script over those directories, and combining the
+Markdown docs into a website using a static site generator like MkDocs 
+https://www.mkdocs.org. A short example of such a script is included and an 
+example `mkdocs.yml` file.
+
 ## FAQ
 
 Why does this script not recurse? It only looks for README.yaml files in the immediate subdirectories.
