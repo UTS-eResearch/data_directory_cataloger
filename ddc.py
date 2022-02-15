@@ -21,6 +21,8 @@ To get help for using the program just run: ./ddc.py -h
 
 License
 
+Copyright 2022 Mike Lake
+
 Data Directory Cataloger is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later version.
@@ -33,7 +35,6 @@ details.
 You should have received a copy of the GNU General Public License along with Foobar. 
 If not, see <https://www.gnu.org/licenses/>. 
 
-Copyright 2022 Mike Lake
 '''
 
 # Filename of the README in each directory that contains the directory meta information.

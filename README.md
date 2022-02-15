@@ -88,6 +88,8 @@ Python 4 or later.
 
 ## License
 
+Copyright 2022 Mike Lake     
+
 Data Directory Cataloger is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free Software 
 Foundation, either version 3 of the License, or (at your option) any later version.
@@ -100,6 +102,5 @@ details.
 You should have received a copy of the GNU General Public License along with
 Data Directory Cataloger. If not, see http://www.gnu.org/licenses/.
 
-Mike Lake     
-January 2022
+Mike Lake
 
