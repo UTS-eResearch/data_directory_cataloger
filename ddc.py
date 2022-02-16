@@ -122,12 +122,11 @@ def parse_readmes(found):
 
     return data
 
-def check_metadata(data):
+def get_metadata(data):
     '''
-    All the READMEs should have the same metadata keys.
-    But we should allow one or more to have missing keys.
-    Here we print out the keys.
-    The number of keys should be the same.
+    Ideally all the READMEs should have the same metadata keys, but some might
+    have missing keys. What we do here is use a set to get a unique set of all 
+    the metadata keys used by all the READMEs.
     '''
 
     # This set starts off as empty but will, at the end of the loop, contain
@@ -141,16 +140,21 @@ def check_metadata(data):
         # we are effectively adding this latest set to the final metadata set.
         metadata = metadata | this_set
 
+    # Return a 'set'.
+    return metadata
+
+def print_metadata(metadata):
+
     print('\nThe following are all the %d metadata attributes found in the %s files.' \
         % (len(metadata), readme))
     print('These should all be unique. If not edit and correct the %s files.' % readme)
+
+    # Print the metadata set as a Markdown list.
     print('')
     [print(' -', item) for item in sorted(metadata)]
 
-    # Now that we have a metadata set containing all the metadata values that are
-    # present in the README.yam files we can check if any READMEs are missing any
-    # metadata values.
-
+def check_metadata(data, metadata):
+    # Here we check if any READMEs are missing any metadata values.
     print('\nChecking each %s file against the metadata list above ...\n' % readme)
     for directory in data.keys():
         doc = data[directory]
@@ -284,9 +288,12 @@ def main():
     columns = ['Title', 'Description', 'Data Manager']
     create_markdown_table(columns, data)
 
-    # Check the metadata in these READMEs for consistency.
     print('\n## Supplementary Information')
-    check_metadata(data)
+    metadata = get_metadata(data)
+    print_metadata(metadata)
+
+    # Check the metadata in these READMEs for consistency.
+    check_metadata(data, metadata)
 
     print('\nThis page last updated on %s' % timenow)
 
