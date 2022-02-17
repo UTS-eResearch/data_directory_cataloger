@@ -155,13 +155,27 @@ def check_metadata(data, metadata):
     Check if any READMEs are missing any metadata values.
     '''
 
-    print('\nChecking each %s file against the metadata list above ...\n' % readme)
+    passed = True
+    newline = False
+
+    print('\nChecking each %s file against the metadata list above ... ' % readme, end='')
     for directory in data.keys():
         doc = data[directory]
         this_set = set(doc.keys())
         if len(doc) != len(metadata):
-            # Note: The set difference used below isn’t commutative!
+            # Print a newline just once, it's needed at the start of the Markdown list.
+            if not newline:
+                print('\n')
+                newline = True
+
+            # The 4 spaces at the end cause Markdown to insert a HTML <BR>.
             print(' -', os.path.join(directory, readme), '    ')
+
+            # This is probably the clearest in Markdown for printing the set differences.
+            # Note: The set difference used below isn’t commutative!
+            print('    Possibly missing: ', end='')
+            l = ['"%s"' % item for item in (metadata - this_set)]
+            print('` %s `' % ', '.join(l))
 
             # Alternatives to printing the set differences.
             #print('    Possibly missing: ', metadata - this_set)
@@ -169,10 +183,10 @@ def check_metadata(data, metadata):
             #print('    Possibly missing: ', end='')
             #print([str(item) for item in (metadata - this_set)])
 
-            # This is probably the clearest in Markdown for printing the set differences.
-            print('    Possibly missing: ', end='')
-            l = ['"%s"' % item for item in (metadata - this_set)]
-            print('` %s `' % ', '.join(l))
+            passed = False
+
+    if passed:    
+        print('OK')
 
 def create_markdown_header(timenow):
     '''
