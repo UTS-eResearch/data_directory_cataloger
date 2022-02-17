@@ -15,7 +15,9 @@ Once it has found the README.yaml file it parses that file, and appends the meta
 to a Markdown document summarising the metadata in the READMEs.
 
 This Markdown doc is just printed to standard output so it can be viewed or redirected
-to an output file. The output file can be converted to a HTML file using pandoc.
+to an output file. Single output files can be converted to HTML using pandoc or if you
+have many Markdown docs they can be used for the content of a static website generator
+such as MkDocs.
 
 To get help for using the program just run: ./ddc.py -h
 
@@ -34,13 +36,12 @@ details.
 
 You should have received a copy of the GNU General Public License along with Foobar. 
 If not, see <https://www.gnu.org/licenses/>. 
-
 '''
 
 # Filename of the README in each directory that contains the directory meta information.
-# This does not need to be literally "README.yaml". It just needs to not clash with other filename
-# in the directory that you are processing. Example, if you don't want to use README.yaml then you
-# might use CATALOG.yaml.
+# This does not need to be literally "README.yaml". It just needs to not clash with other 
+# filename in the directory that you are processing. Example, if you don't want to use 
+# README.yaml then you might use CATALOG.yaml.
 readme='README.yaml'
 
 import argparse, os, sys
@@ -144,17 +145,21 @@ def get_metadata(data):
     return metadata
 
 def print_metadata(metadata):
+    '''
+    Print the metadata as a Markdown list.
+    '''
 
     print('\nThe following are all the %d metadata attributes found in the %s files.' \
         % (len(metadata), readme))
     print('These should all be unique. If not edit and correct the %s files.' % readme)
-
-    # Print the metadata set as a Markdown list.
     print('')
     [print(' -', item) for item in sorted(metadata)]
 
 def check_metadata(data, metadata):
-    # Here we check if any READMEs are missing any metadata values.
+    '''
+    Check if any READMEs are missing any metadata values.
+    '''
+
     print('\nChecking each %s file against the metadata list above ...\n' % readme)
     for directory in data.keys():
         doc = data[directory]
@@ -175,10 +180,12 @@ def check_metadata(data, metadata):
             print('` %s `' % ', '.join(l))
 
 def create_markdown_header(timenow):
+    '''
+    Valid Markdown docs have some metadata at the top. Set that here.
+    Note we use a backslash here to suppress the leading newline
+    as we do not want that in the Markdown.
+    '''
 
-    # Valid Markdown docs have some metadata at the top. Set that here.
-    # Note we use a backslash here to suppress the leading newline
-    # as we do not want that in the Markdown.
     metadata = '''\
 ---
 pagetitle: %s
@@ -266,7 +273,7 @@ def main():
     # Get all the READMEs under the base directory.
     (found, missing) = get_readmes(basedir)
 
-    # Print some info to the user on what was found or otherwise.
+    # Print info in Markdown format on the READMEs found or otherwise.
     if len(missing) != 0:
         print('\n## Warnings\n')
         print('\nThe following subdirectories are missing a %s file:\n' % readme)
