@@ -108,15 +108,10 @@ def parse_readmes(found):
         # Debugging lines
         #print('---------------------------')
         #print('README: %s' % file)
+        #print('KEYS:', doc.keys())
         #print('PYTHON OBJECT: ', doc)
         #print('YAML DUMP:')
-        #print(yaml.dump(doc, default_flow_style=False, sort_keys=False))
-        #print(doc.keys())
-
-        # UPTO
-        # Here we add the current "dir" to this YAML doc so that we will have
-        # this info when we print out the Markdown table.
-        #doc['Directory'] = dir
+        #print(yaml.dump(doc, default_flow_style=False))
 
         # Add this YAML doc to the data dictionary with the directory path as the key.
         data[dir] = doc
