@@ -304,7 +304,7 @@ def main():
     columns = ['Title', 'Description', 'Data Manager']
     create_markdown_table(columns, data)
 
-    print('\n## Supplementary Information')
+    print('\n## Metadata Information')
     metadata = get_metadata(data)
     print_metadata(metadata)
 
