@@ -31,12 +31,10 @@ def create_readmes(basedir):
 
     for dir in subdirs: 
         doc = '''\
----
 Title: 
 Description: 
 Data Manager: Mike Lake
 Data Location: %s
----
 ''' % dir
 
         file = os.path.join(dir, readme)
