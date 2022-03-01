@@ -15,7 +15,7 @@ To change the contents of the README.yaml you will need to edit this script.
     
 readme='README.yaml'
 
-import os, sys, datetime
+import os, sys
 
 def create_readmes(basedir):
     '''
@@ -70,9 +70,6 @@ def main():
         print('Exiting')
         sys.exit()
     
-    # Get the time and todays date.
-    timenow = datetime.datetime.now().strftime('%Y-%m-%d at %I:%M %p')
-   
     # Create READMEs under the base directory if they do not exist. 
     found = create_readmes(basedir)
 
