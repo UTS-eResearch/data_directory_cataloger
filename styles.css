@@ -1,3 +1,5 @@
+/* Example styles */
+
 body {
   margin: 10px;
   padding: 0;
@@ -5,9 +7,9 @@ body {
 
 h1, h2 { font-family: Arial, Helvetica, sans-serif; }
 
-p { font-family: "Verdana", sans-serif;}
+p { font-family: "Verdana", sans-serif; }
 
-code { font-size: 130%; }
+code { font-size: 120%; }
 
 pre {
   font-size: 90%;
@@ -18,25 +20,18 @@ pre {
 }
 
 table {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #666666;
+    border: 1px solid #666666;
     border-collapse: collapse;
 }
 
-table th {
+table th, td {
     padding: 8px;
     border-width: 1px;
     border-style: solid;
     border-color: #666666;
-    background-color: #dedede;
 }
 
-table td {
-    padding: 8px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #666666;
-    background-color: #ffffff;
+table th {    
+    background-color: #dedede;
 }
 
