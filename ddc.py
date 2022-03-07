@@ -48,15 +48,12 @@ import argparse, os, sys
 import yaml, datetime
 
 def parse_args():
+    ''' There is one mandatory arg (a directory) and no optional args.
+    '''
 
     parser = argparse.ArgumentParser( \
         description='Program to catalog all %s docs under a directory.' % readme)
-
-    # Mandatory arguments.
     parser.add_argument('directory', help='The directory to catalog.')
-
-    # Optional arguments. None
-
     args = parser.parse_args()
     return args
 
