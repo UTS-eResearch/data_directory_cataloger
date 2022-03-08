@@ -3,19 +3,21 @@ pagetitle: Data Directory Cataloger
 creator: ./ddc.py
 date: 2022-03-07 at 11:43 PM
 ---
-# Directory `/home/mikel/virtualenvs/`
+# Directory `/shared/opt/`
 
 ## Summary
 
-
-Found 3 `README.yaml` files in the directories under `/home/mikel/virtualenvs/`.
-A summary of the metadata in these files follows.
+Found 16 README.yaml files in the directories under /shared/opt/. A summary of the metadata in these files follows.
 
 | Directory | Title | Description | Data Manager |
 | --------- | ----- | ----------- | ------------ |
-| /home/mikel/virtualenvs/cave | The SUSS Cave | Virtualenv for Python 3. | Mike Lake |
-| /home/mikel/virtualenvs/cave2 | The SUSS Cave | Virtualenv for Python 2.7 | Mike Lake |
-| /home/mikel/virtualenvs/marlyn_website | Marlyn Alpaca Website | Used by product images code. See ~/public_html/marlynalpaca/website/ | Mike Lake |
+| /shared/opt/R-3.4.4        | R version 3.4.4       | R version 3.4.4. This is old and can be removed. | Mike Lake |
+| /shared/opt/centos6        | Old Centos 6 programs | Older programs compiled under Centos 6. They may work under Centos 8. | Mike Lake |
+| /shared/opt/fastqc-0.10.1  | FastQC                | FastQC is a high throughput sequence QC analysis tool. It reads a set of sequence files and produces from each one a quality control report. | Mike Lake |
+| /shared/opt/gromacs-2018.8 | GROMACS 2018.8        | Molecular dynamics package mainly designed for simulations of proteins, lipids, and nucleic acids. Compiled with PBS MPI. | Mike Lake |
+| /shared/opt/intel          | Intel Compiler        | Intel compiler version 2018 | Mike Lake |
+
+(The rest of the info has been removed for this example.)
 
 ## Metadata Information
 
@@ -31,3 +33,4 @@ These should all be unique. If not edit and correct the README.yaml files.
 Checking each README.yaml file against the metadata list above ... OK
 
 This page last updated on 2022-03-07 at 11:43 PM
+
