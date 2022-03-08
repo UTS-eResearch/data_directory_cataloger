@@ -11,8 +11,8 @@ metadata, and outputs a single Markdown document summarising the metadata in the
 This Markdown doc can then be easily transformed to a HTML file (e.g. using `pandoc`)
 which will provide a single point of information about the contents of the directories.
 
-Also System Administrators can look in the directory and will find the `README.yaml` 
-file which describes the data and who manages it. The README.yaml files can be also 
+Also System Administrators can look in the sub-directories and will find the `README.yaml` 
+files which describe the data and who manages it. The README.yaml files can be also 
 be programatically searched for metadata such as the data manager or data disposal
 dates.
 
@@ -55,6 +55,13 @@ Run the program and save the Markdown output, then convert to a HTML page:
     $ pandoc --css=styles.css --self-contained CATALOG.md > CATALOG.html
 
 The `styles.css` file is optional.
+
+As an example I have run this against our `/shared/opt/` directory and used
+`pandoc` (read `run_markdown.sh`) to convert this to `example.html`. Those 
+example files are also included in this repo.
+
+    $ ./ddc.py /shared/opt/ > example.md
+    $ ./run_markdown.sh
 
 Of course most users will have many directories to manage. A better option is to
 run a bash script that runs this script over those directories, and combining the
