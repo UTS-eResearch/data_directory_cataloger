@@ -5,15 +5,20 @@ numerous directories by having a README.yaml in most directories and which
 stores metadata about the contents of that directory. Typical metadata that
 you would store might be "Description", "Data Manager" and "Disposal Date".
 
-When the program is run on a top level directory it looks for README.yaml files in
-the **immediate** sub-directories. From those README.yaml files it reads the metadata, and
-outputs a single Markdown document summarising the metadata in the READMEs.
-This Markdown doc can then be easily transformed to a HTML file (e.g. using pandoc)
+When the program is run on a top level directory it looks for `README.yaml` files
+in the **immediate** sub-directories. From those `README.yaml` files it reads the
+metadata, and outputs a single Markdown document summarising the metadata in the READMEs.
+This Markdown doc can then be easily transformed to a HTML file (e.g. using `pandoc`)
 which will provide a single point of information about the contents of the directories.
 
-Also System Administrators can look in the directory and find the file which
-describes the data and who manages it. The README.yaml files can be programatically
-searched for metadata such as the data manager or data disposal dates.
+Also System Administrators can look in the directory and will find the `README.yaml` 
+file which describes the data and who manages it. The README.yaml files can be also 
+be programatically searched for metadata such as the data manager or data disposal
+dates.
+
+Multiple top level directories can be cataloged and the Markdown docs can be combined 
+into a static website which then describes multiple top-level directories. Each
+of those might even have different metadata fields.
 
 ## What a README.yaml Looks Like
 
