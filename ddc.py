@@ -155,14 +155,15 @@ def check_metadata(data, metadata):
     passed = True
     newline = False
 
-    print('\nChecking each %s file against the metadata list above ... ' % readme, end='')
     for directory in data.keys():
         doc = data[directory]
         this_set = set(doc.keys())
         if len(doc) != len(metadata):
             # Print a newline just once, it's needed at the start of the Markdown list.
             if not newline:
-                print('\n')
+                print('\n## Metadata Warnings')
+                print('\nChecking each %s file against the metadata list above ... ' % readme)
+                print('\n', end='')
                 newline = True
 
             # The 4 spaces at the end cause Markdown to insert a HTML <BR>.
@@ -183,7 +184,7 @@ def check_metadata(data, metadata):
             passed = False
 
     if passed:    
-        print('OK')
+        print('\nChecking each %s file against the metadata list above ... OK' % readme)
 
 def create_markdown_header(timenow):
     '''
