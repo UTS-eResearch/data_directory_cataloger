@@ -27,6 +27,8 @@ theme:
     #- navigation.tabs      # Top-level sections are rendered in a menu layer below the header.
     - navigation.expand     # Left sidebar will expand all collapsible subsections by default.
 
+extra_css: [css/extra.css]
+
 nav:
   - "Home": index.md
   - "Directories":
@@ -34,6 +36,8 @@ nav:
     - "/shared/eresearch": shared_eresearch.md
     - "/shared/eresearch/pbs_job_examples": shared_eresearch_pbs_job_examples.md
     - "/shared/opt": shared_opt.md
+    - "/shared/c3": shared_c3.md
+    - "/shared/isf": shared_isf.md
   - "How does this Work?": how.md
   - "About this Site": about.md
 
