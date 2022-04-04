@@ -141,7 +141,7 @@ def print_metadata(metadata):
     Print the metadata as a Markdown list.
     '''
 
-    print('\nThe following are all the %d metadata attributes found in the %s files.' \
+    print('\nThe following are all the %d metadata attributes found in the %s files at this level.' \
         % (len(metadata), readme))
     print('These should all be unique. If not edit and correct the %s files.' % readme)
     print('')
