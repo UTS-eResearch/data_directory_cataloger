@@ -9,7 +9,8 @@
 #   ./update_ddc_site.sh
 
 # Catalog the README.yaml files in the following directories.
-sudo ./ddc.py /shared                       > docs/shared.md
+sudo true
+./ddc.py /shared                            > docs/shared.md
 ./ddc.py /shared/eresearch                  > docs/shared_eresearch.md
 ./ddc.py /shared/eresearch/pbs_job_examples > docs/shared_eresearch_pbs_job_examples.md
 ./ddc.py /shared/opt/                       > docs/shared_opt.md
