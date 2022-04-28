@@ -4,24 +4,40 @@
 This creates README.yaml files in all the first level subdirectories under a base directory.
 Any existing README.yaml files are not overwritten.
 
-Usage: 
-This program just takes one input arg, the base directory path.
+Usage:
+
+This program just takes one mandatory arg, the base directory path.
+This must be the first argument.
+The user can also supply a second arg; either "-t" or "--test".
+If this is supplied no README.yaml files will actually be written.
+
 The output is a list of the README.yaml files found and/or created.
 
-    ./write_readmes.py base_directory
+    path_to/write_readmes.py base_directory [-t]
 
 To change the contents of the README.yaml you will need to edit this script.
+
+Mike Lake
 '''
-    
+
 readme='README.yaml'
 
 import os, sys
 
-def create_readmes(basedir):
+def usage(msg=None):
+    print('')
+    print("Usage: %s base_directory [-t]" % sys.argv[0])
+    print('  base directory')
+    print('')
+    if msg:
+        print(msg)
+    sys.exit()
+
+def create_readmes(basedir, test):
     '''
-    Given a base directory find the top level subdirectories. If there is a 
-    README.yaml then do not replace it, if there is no README.yaml then 
-    create one using the doc string below. 
+    Given a base directory find the top level subdirectories. If there is a
+    README.yaml then do not replace it, if there is no README.yaml then
+    create one using the doc string below.
     '''
 
     found = []      # List of paths for found READMEs.
@@ -29,7 +45,10 @@ def create_readmes(basedir):
     # scandir returns an iterator of DirEntry objects for the given path.
     subdirs = [ f.path for f in os.scandir(basedir) if f.is_dir() ]
 
-    for dir in subdirs: 
+    for dir in subdirs:
+
+        # Edit this if you need to change the README.yaml.
+        # Note you will want a trailing space after the ":".
         doc = '''\
 Title: 
 Description: 
@@ -44,11 +63,14 @@ Data Location: %s
             continue
         else:
             # Create a README.yaml
-            with open(file, 'w') as fh:
-                fh.write(doc)
-            fh.close()
-            print('Wrote ', file)
-   
+            if not test:
+                with open(file, 'w') as fh:
+                    fh.write(doc)
+                fh.close()
+                print('Wrote ', file)
+            else:
+                print('Would have wrote ', file)
+
     # Sort alphabetically just for the users convenience.
     found.sort()
 
@@ -57,26 +79,38 @@ Data Location: %s
 
 def main():
 
-    if len(sys.argv) != 2:
-        print("Usage: ", sys.argv[0],  "base_directory")
-        print('Needs a base directory as an arg. Exiting.')
-        sys.exit()
-    else:
-        basedir = sys.argv[1]
+    test = False
 
-    # This arg shoud be a directory.
+    # Process the args. I do not like argparse.
+    if len(sys.argv) < 2:
+        usage('Error: You need to specify a base directory. Exiting')
+    elif len(sys.argv) == 2:
+        basedir = sys.argv[1]
+        print('Processing %s ...' % basedir)
+    elif len(sys.argv) == 3:
+        basedir = sys.argv[1]
+        if sys.argv[2] == '-t' or sys.argv[2] == '--test':
+            print('Testing only %s' % basedir)
+            test = True
+        else:
+            usage('Error: Not a valid option: %s' % sys.argv[2])
+    else:
+        usage('Error: Too many args passed.')
+        sys.exit()
+
+    # Check the basedir exists and is a directory.
     if not os.path.isdir(basedir):
         print('Error: you must supply a directory, %s is not a directory.' % basedir)
         print('Exiting')
         sys.exit()
-    
-    # Create READMEs under the base directory if they do not exist. 
-    found = create_readmes(basedir)
+
+    # Create READMEs under the base directory if they do not exist.
+    found = create_readmes(basedir, test)
 
     if len(found) != 0:
-        print('\nThe following directories have a %s file:\n' % readme)
+        print('\nThe following directories already have a %s file:\n' % readme)
         for path in found:
-            print(path)
+            print("  ", path)
 
 if __name__ == '__main__':
     main()
