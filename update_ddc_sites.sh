@@ -20,5 +20,5 @@ source ~/virtualenvs/mkdocs3/bin/activate
 mkdocs build
 
 # If you wish to use --delete do not use "site/*" use "site/". Man rsync for why.
-rsync -r --delete site/* /var/www/html_ddc/ 
+rsync -r --delete site/ /var/www/html_ddc/ 
 
