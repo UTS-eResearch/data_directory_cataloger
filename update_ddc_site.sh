@@ -5,7 +5,7 @@
 # static website generator MkDocs and upload the site.
 #
 # Usage: 
-# Make sure you are in this git repo directory then run:
+# Make sure you are in this repo directory then run:
 #   ./update_ddc_site.sh
 
 # Catalog the README.yaml files in the following directories.
