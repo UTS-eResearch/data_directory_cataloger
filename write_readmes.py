@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 '''
-This creates README.yaml files in all the first level subdirectories under a base directory.
-Any existing README.yaml files are not overwritten.
+This creates README.yaml files in all the first level subdirectories under
+a base directory. Existing README.yaml files are not overwritten.
 
 Usage:
 
@@ -20,24 +20,37 @@ To change the contents of the README.yaml you will need to edit this script.
 Mike Lake
 '''
 
+# This is the name of the file to be written. Do not change this.
 readme='README.yaml'
+
+# This is the default template for the README.yaml if you do not specify one 
+# on the command line. This program will automatically add a "Data Location"
+# field to the end of this template. So do not add one here.
+# Note you will also want a trailing space after each ":".
+readme_default = '''\
+Title: 
+Description: 
+Data Manager: 
+'''
 
 import os, sys
 
 def usage(msg=None):
     print('')
-    print("Usage: %s base_directory [-t]" % sys.argv[0])
-    print('  base directory')
+    print("Usage: %s base_directory [-r README.yaml] [-t]" % sys.argv[0])
+    print('  Required: a base directory  e.g. /opt')
+    print('  Optional: a README template e.g. -r README_opt.yaml')
+    print('  Optional: -t or --test to only do a test.')
     print('')
     if msg:
         print(msg)
     sys.exit()
 
-def create_readmes(basedir, test):
+def create_readmes(basedir, template=readme_default, test=False):
     '''
     Given a base directory find the top level subdirectories. If there is a
     README.yaml then do not replace it, if there is no README.yaml then
-    create one using the doc string below.
+    create one.
     '''
 
     found = []      # List of paths for found READMEs.
@@ -46,15 +59,7 @@ def create_readmes(basedir, test):
     subdirs = [ f.path for f in os.scandir(basedir) if f.is_dir() ]
 
     for dir in subdirs:
-
-        # Edit this if you need to change the README.yaml.
-        # Note you will want a trailing space after the ":".
-        doc = '''\
-Title: 
-Description: 
-Data Manager: Mike Lake
-Data Location: %s
-''' % dir
+        doc = template + "Data Location: %s\n" % dir
 
         file = os.path.join(dir, readme)
         if os.path.isfile(file):
@@ -80,7 +85,12 @@ Data Location: %s
 def main():
 
     test = False
-
+    '''
+    ./prog 
+    ./prog dir 
+    ./prog dir template
+    ./prog dir template -t
+    '''
     # Process the args. I do not like argparse.
     if len(sys.argv) < 2:
         usage('Error: You need to specify a base directory. Exiting')
@@ -105,7 +115,7 @@ def main():
         sys.exit()
 
     # Create READMEs under the base directory if they do not exist.
-    found = create_readmes(basedir, test)
+    found = create_readmes(basedir, readme_default, test)
 
     if len(found) != 0:
         print('\nThe following directories already have a %s file:\n' % readme)
