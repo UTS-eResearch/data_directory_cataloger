@@ -12,6 +12,7 @@
 if [ ! -d docs ]; then mkdir docs; fi
 
 # Catalog the README.yaml files in the following directories.
+./ddc.py /shared/c3             > docs/c3.md
 ./ddc.py /shared/c3/apps        > docs/apps.md
 ./ddc.py /shared/c3/archives    > docs/archives.md
 ./ddc.py /shared/c3/bio_db      > docs/bio_db.md
