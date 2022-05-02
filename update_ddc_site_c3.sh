@@ -9,18 +9,16 @@
 #   ./update_ddc_site.sh
 
 # Catalog the README.yaml files in the following directories.
-# sudo is needed here to search some directories under /shared.
-sudo true
-./ddc.py /shared                            > docs/shared.md
-./ddc.py /shared/eresearch                  > docs/shared_eresearch.md
-./ddc.py /shared/eresearch/pbs_job_examples > docs/shared_eresearch_pbs_job_examples.md
-./ddc.py /shared/opt                        > docs/shared_opt.md
-./ddc.py /shared/c3                         > docs/shared_c3.md
+./ddc.py /shared/c3/apps        > docs/apps.md
+./ddc.py /shared/c3/archives    > docs/archives.md
+./ddc.py /shared/c3/bio_db      > docs/bio_db.md
+./ddc.py /shared/c3/instruments > docs/instruments.md
+./ddc.py /shared/c3/projects    > docs/projects.md
 
 # Build the website.
-source /shared/homes/mlake/virtualenvs/mkdocs3/bin/activate
+source /home/c3_admin/virtualenvs/mkdocs/bin/activate
 mkdocs build
 
 # If you wish to use --delete do not use "site/*" use "site/". Man rsync for why.
-rsync -r --delete site/ /var/www/html_ddc/ 
+rsync -r --delete site/ /var/www/c3/ 
 
