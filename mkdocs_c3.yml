@@ -33,12 +33,12 @@ extra_css: [css/extra.css]
 nav:
   - "Home": index.md
   - "Directories":
-    - "/shared/c3": shared.md
+    - "/shared/c3": c3.md
     - "/shared/c3/apps": apps.md
     - "/shared/c3/archives": archives.md
     - "/shared/c3/bio_db": bio_db.md
     - "/shared/c3/instruments": instruments.md
-    - "/shared/c3/project": project.md
+    #- "/shared/c3/project": project.md
   - "How does this Work?": how.md
   - "About this Site": about.md
 
