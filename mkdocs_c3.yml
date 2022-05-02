@@ -16,12 +16,11 @@ markdown_extensions:
 # Docs for mkdocs macros: https://mkdocs-macros-plugin.readthedocs.io/en/latest/
 plugins:
     - search
-    - macros
 
 # Themes supplied with MkDocs are: mkdocs readthedocs.
 # To use the material theme: "pip install mkdocs-material".
 theme:
-  logo: images/uts_logo_ccc.png
+  logo: images/uts_logo.png
   name: material
   features:  
     - navigation.instant
