@@ -21,7 +21,7 @@ if [ ! -d docs ]; then mkdir docs; fi
 
 # Build the website.
 source /home/c3_admin/virtualenvs/mkdocs/bin/activate
-mkdocs build
+mkdocs build --config-file mkdocs_c3.yml
 
 # If you wish to use --delete do not use "site/*" use "site/". Man rsync for why.
 rsync -r --delete site/ /var/www/c3/ 
