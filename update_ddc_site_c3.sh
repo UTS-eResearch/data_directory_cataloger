@@ -8,6 +8,9 @@
 # Make sure you are in this repo directory then run:
 #   ./update_ddc_site.sh
 
+# Create directory docs if it does not exist.
+if [ ! -d docs ]; then mkdir docs; fi
+
 # Catalog the README.yaml files in the following directories.
 ./ddc.py /shared/c3/apps        > docs/apps.md
 ./ddc.py /shared/c3/archives    > docs/archives.md
