@@ -17,7 +17,7 @@ if [ ! -d docs ]; then mkdir docs; fi
 ./ddc.py /shared/c3/archives    > docs/archives.md
 ./ddc.py /shared/c3/bio_db      > docs/bio_db.md
 ./ddc.py /shared/c3/instruments > docs/instruments.md
-./ddc.py /shared/c3/projects    > docs/projects.md
+#./ddc.py /shared/c3/projects    > docs/projects.md
 
 # Build the website.
 source /home/c3_admin/virtualenvs/mkdocs/bin/activate
