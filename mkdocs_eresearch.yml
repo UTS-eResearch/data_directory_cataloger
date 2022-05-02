@@ -1,0 +1,53 @@
+# mkdocs main configuration file.
+
+site_name: "eResearch Data Catalog"
+site_url: "http://localhost"
+repo_url: https://code.research.uts.edu.au/950654/data_dir_cataloger
+use_directory_urls: true
+
+markdown_extensions:
+  - tables
+  - smarty
+  - toc:
+      toc_depth: 2
+      permalink: True
+      separator: "_"
+
+# Docs for mkdocs macros: https://mkdocs-macros-plugin.readthedocs.io/en/latest/
+plugins:
+    - search
+    - macros
+
+# Available are: mkdocs readthedocs windmill material
+theme:
+  logo: images/uts_logo_ccc.png
+  name: material
+  features:  
+    - navigation.instant
+    - navigation.top        # Creates a back-to-top "arrow icon" at bottom RHS.
+    #- navigation.tabs      # Top-level sections are rendered in a menu layer below the header.
+    - navigation.expand     # Left sidebar will expand all collapsible subsections by default.
+  palette: 
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+extra_css: [css/extra.css]
+
+nav:
+  - "Home": index.md
+  - "Directories":
+    - "/shared": shared.md
+    - "/shared/eresearch": shared_eresearch.md
+    - "/shared/eresearch/pbs_job_examples": shared_eresearch_pbs_job_examples.md
+    - "/shared/opt": shared_opt.md
+    - "/shared/c3": shared_c3.md
+    - "/shared/isf": shared_isf.md
+  - "How does this Work?": how.md
+  - "About this Site": about.md
+
