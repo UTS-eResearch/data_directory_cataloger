@@ -9,6 +9,7 @@
 #   ./update_ddc_site.sh
 
 # Catalog the README.yaml files in the following directories.
+# sudo is needed here to search some directories under /shared.
 sudo true
 ./ddc.py /shared                            > docs/shared.md
 ./ddc.py /shared/eresearch                  > docs/shared_eresearch.md
