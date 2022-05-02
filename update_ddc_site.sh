@@ -14,10 +14,11 @@ sudo true
 ./ddc.py /shared                            > docs/shared.md
 ./ddc.py /shared/eresearch                  > docs/shared_eresearch.md
 ./ddc.py /shared/eresearch/pbs_job_examples > docs/shared_eresearch_pbs_job_examples.md
-./ddc.py /shared/opt/                       > docs/shared_opt.md
+./ddc.py /shared/opt                        > docs/shared_opt.md
+./ddc.py /shared/c3                         > docs/shared_c3.md
 
 # Build the website.
-source ~/virtualenvs/mkdocs3/bin/activate
+source /shared/homes/mlake/virtualenvs/mkdocs3/bin/activate
 mkdocs build
 
 # If you wish to use --delete do not use "site/*" use "site/". Man rsync for why.
