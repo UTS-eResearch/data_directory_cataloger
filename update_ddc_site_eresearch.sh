@@ -19,7 +19,7 @@ sudo true
 
 # Build the website.
 source /shared/homes/mlake/virtualenvs/mkdocs3/bin/activate
-mkdocs build
+mkdocs build --config-file mkdocs_eresearch.yml
 
 # If you wish to use --delete do not use "site/*" use "site/". Man rsync for why.
 rsync -r --delete site/ /var/www/html_ddc/ 

@@ -1,6 +1,6 @@
 # mkdocs main configuration file.
 
-site_name: "eResearch Data Catalog"
+site_name: "eResearch Data Directory Catalog"
 site_url: "http://localhost"
 repo_url: https://code.research.uts.edu.au/950654/data_dir_cataloger
 use_directory_urls: true
@@ -18,7 +18,8 @@ plugins:
     - search
     - macros
 
-# Available are: mkdocs readthedocs windmill material
+# Themes available with mkDocs are: mkdocs readthedocs
+# To use the material theme: "pip install mkdocs-material".
 theme:
   logo: images/uts_logo.png
   name: material
