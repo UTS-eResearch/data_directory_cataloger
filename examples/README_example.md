@@ -36,8 +36,7 @@ For this example nothing needed to be changed so it was just run.
 
     $ ./write_readmes.py /shared/opt
 
-Each of the top level directories below here now contains a README.yaml
-file.
+Each of the top level directories now contains a README.yaml file.
 
 ## The README.yaml files under `/shared/opt/`
 
@@ -83,7 +82,7 @@ As you can see above we now have all the metadata describing each sub-directory 
 
 ## Run the DDC Program
 
-I then ran the DDC program over the top level directory directory, directing
+I then ran the Data Directory Cataloger program over the top level directory directory, directing
 the output to `example.md`:
     
     $ ./ddc.py /shared/opt > example.md
@@ -98,7 +97,7 @@ Then I used "pandoc" to convert the "example.md" Markdown document into the
 This requires the `styles.css` to be in this directory. It will produce a
 standalone HTML doc. The `--self-contained` option will insert the styles
 into the head of the doc. Hence it will not require the separate styles.css
-file to be present.
+file to be present when viewing the web page.
 
 You can install `pandoc` from your Linux distribution's repositories.
 
