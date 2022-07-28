@@ -25,9 +25,9 @@ Mike Lake
 # This is the name of the file to be written. Do not change this.
 readme='README.yaml'
 
-# This is the default template for the README.yaml if you do not specify one 
-# on the command line. This program will automatically add a "Data Location"
-# field to the end of this template. So do not add one here.
+# This is the template for the README.yaml that will be written.
+# This program will automatically add a "Data Location" field 
+# to the end of this template. So do not add one here.
 # Note you will also want a trailing space after each ":".
 readme_default = '''\
 Title: 
@@ -61,8 +61,13 @@ def create_readmes(basedir, template=readme_default, test=False):
 
     for dir in subdirs:
         doc = template + "Data Location: %s\n" % dir
-
         file = os.path.join(dir, readme)
+
+        # Debugging lines that can be uncommented.
+        #print(file)
+        #for line in doc.split('\n'):
+        #    print('  ', line)
+
         if os.path.isfile(file):
             # Found a README.yaml, do not overwrite it.
             found.append(file)
@@ -120,9 +125,9 @@ def main():
     found = create_readmes(basedir, readme_default, test)
 
     if len(found) != 0:
-        print('\nThe following directories already have a %s file:\n' % readme)
+        print('\nThe following directories already had a %s file so were not changed:' % readme)
         for path in found:
-            print("  ", path)
+            print('  ', path)
 
 if __name__ == '__main__':
     main()
