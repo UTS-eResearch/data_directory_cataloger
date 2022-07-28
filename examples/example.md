@@ -7,7 +7,7 @@ date: 2022-03-07 at 11:43 PM
 
 ## Summary
 
-Found 16 README.yaml files in the directories under /shared/opt/. A summary of the metadata in these files follows.
+Found 5 README.yaml files in the directories under /shared/opt/. A summary of the metadata in these files follows.
 
 | Directory | Title | Description | Data Manager |
 | --------- | ----- | ----------- | ------------ |
@@ -16,8 +16,6 @@ Found 16 README.yaml files in the directories under /shared/opt/. A summary of t
 | /shared/opt/fastqc-0.10.1  | FastQC                | FastQC is a high throughput sequence QC analysis tool. It reads a set of sequence files and produces from each one a quality control report. | Mike Lake |
 | /shared/opt/gromacs-2018.8 | GROMACS 2018.8        | Molecular dynamics package mainly designed for simulations of proteins, lipids, and nucleic acids. Compiled with PBS MPI. | Mike Lake |
 | /shared/opt/intel          | Intel Compiler        | Intel compiler version 2018 | Mike Lake |
-
-(The rest of the info has been removed for this example.)
 
 ## Metadata Information
 
