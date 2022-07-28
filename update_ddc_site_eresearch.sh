@@ -8,6 +8,9 @@
 # Make sure you are in this repo directory then run:
 #   ./update_ddc_site.sh
 
+# Create directory docs if it does not exist.
+if [ ! -d docs ]; then mkdir docs; fi
+
 # Catalog the README.yaml files in the following directories.
 # sudo is needed here to search some directories under /shared.
 sudo true
