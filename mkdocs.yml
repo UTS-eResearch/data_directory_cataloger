@@ -1,5 +1,7 @@
-# mkdocs main configuration file.
-
+# MkDocs main configuration file.
+# This is an example mkdocs.yml that can form the basic of you own site.
+# You will need to change most of the settings here.
+#
 site_name: "Data Directory Catalog"
 site_url: "http://localhost"
 repo_url: https://code.research.uts.edu.au/950654/data_dir_cataloger
@@ -13,12 +15,12 @@ markdown_extensions:
       permalink: True
       separator: "_"
 
-# Docs for mkdocs macros: https://mkdocs-macros-plugin.readthedocs.io/en/latest/
+# The macros plugin for MkDocs is very useful. Docs for that are here: 
+# https://mkdocs-macros-plugin.readthedocs.io/en/latest/
 plugins:
     - search
-    - macros
 
-# Themes available with mkDocs are: mkdocs readthedocs
+# Themes supplied with MkDocs are: mkdocs readthedocs.
 # To use the material theme: "pip install mkdocs-material".
 theme:
   logo: images/uts_logo.png
@@ -31,6 +33,7 @@ theme:
 
 extra_css: [css/extra.css]
 
+# Example nav settings for our eResearch site.
 nav:
   - "Home": index.md
   - "Directories":
