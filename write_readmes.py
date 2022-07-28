@@ -16,6 +16,8 @@ The output is a list of the README.yaml files found and/or created.
     path_to/write_readmes.py base_directory [-t]
 
 To change the contents of the README.yaml you will need to edit this script.
+    
+TODO: An optional README template e.g. -r README_opt.yaml
 
 Mike Lake
 '''
@@ -37,9 +39,8 @@ import os, sys
 
 def usage(msg=None):
     print('')
-    print("Usage: %s base_directory [-r README.yaml] [-t]" % sys.argv[0])
+    print("Usage: %s base_directory [-t]" % sys.argv[0])
     print('  Required: a base directory  e.g. /opt')
-    print('  Optional: a README template e.g. -r README_opt.yaml')
     print('  Optional: -t or --test to only do a test.')
     print('')
     if msg:
@@ -53,7 +54,7 @@ def create_readmes(basedir, template=readme_default, test=False):
     create one.
     '''
 
-    found = []      # List of paths for found READMEs.
+    found = [] # List of paths for found READMEs.
 
     # scandir returns an iterator of DirEntry objects for the given path.
     subdirs = [ f.path for f in os.scandir(basedir) if f.is_dir() ]
@@ -83,14 +84,15 @@ def create_readmes(basedir, template=readme_default, test=False):
     return found
 
 def main():
-
-    test = False
     '''
     ./prog 
     ./prog dir 
     ./prog dir template
     ./prog dir template -t
     '''
+
+    test = False
+
     # Process the args. I do not like argparse.
     if len(sys.argv) < 2:
         usage('Error: You need to specify a base directory. Exiting')
