@@ -64,7 +64,7 @@ It will print a single Markdown document containing the metadata in the READMEs.
 We actually need to save this output so it can be converted to a HTML page so
 redirect it to a file:
     
-    $ ./ddc.py /shared/opt > CATALOG.yaml
+    $ ./ddc.py /shared/opt > CATALOG.md
 
 Now you can use a utility like `pandoc` to convert the Markdown to a HTML page:
 
