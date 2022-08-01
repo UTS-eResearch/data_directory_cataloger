@@ -34,13 +34,13 @@ WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
 details.
 
-You should have received a copy of the GNU General Public License along with Foobar. 
-If not, see <https://www.gnu.org/licenses/>. 
+You should have received a copy of the GNU General Public License along with Foobar.
+If not, see <https://www.gnu.org/licenses/>.
 '''
 
 # Filename of the README in each directory that contains the directory meta information.
-# This does not need to be literally "README.yaml". It just needs to not clash with other 
-# filename in the directory that you are processing. Example, if you don't want to use 
+# This does not need to be literally "README.yaml". It just needs to not clash with other
+# filename in the directory that you are processing. Example, if you don't want to use
 # README.yaml then you might use CATALOG.yaml.
 readme='README.yaml'
 
@@ -118,7 +118,7 @@ def parse_readmes(found):
 def get_metadata(data):
     '''
     Ideally all the READMEs should have the same metadata keys, but some might
-    have missing keys. What we do here is use a set to get a unique set of all 
+    have missing keys. What we do here is use a set to get a unique set of all
     the metadata keys used by all the READMEs.
     '''
 
@@ -183,7 +183,7 @@ def check_metadata(data, metadata):
 
             passed = False
 
-    if passed:    
+    if passed:
         print('\nChecking each %s file against the metadata list above ... OK' % readme)
 
 def create_markdown_header(timenow):
