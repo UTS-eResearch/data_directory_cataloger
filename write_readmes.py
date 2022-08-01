@@ -2,18 +2,18 @@
 
 '''
 This creates README.yaml files in all the first level subdirectories under
-a base directory. Existing README.yaml files are not overwritten.
+a top level directory. Existing README.yaml files are not overwritten.
 
 Usage:
 
-This program just takes one mandatory arg, the base directory path.
+This program just takes one mandatory arg, the top level directory path.
 This must be the first argument.
 The user can also supply a second arg; either "-t" or "--test".
 If this is supplied no README.yaml files will actually be written.
 
 The output is a list of the README.yaml files found and/or created.
 
-    path_to/write_readmes.py base_directory [-t]
+    path_to/write_readmes.py top_directory [-t]
 
 To change the contents of the README.yaml you will need to edit this script.
     
@@ -39,25 +39,25 @@ import os, sys
 
 def usage(msg=None):
     print('')
-    print("Usage: %s base_directory [-t]" % sys.argv[0])
-    print('  Required: a base directory  e.g. /opt')
+    print("Usage: %s top_directory [-t]" % sys.argv[0])
+    print('  Required: a top directory  e.g. /opt')
     print('  Optional: -t or --test to only do a test.')
     print('')
     if msg:
         print(msg)
     sys.exit()
 
-def create_readmes(basedir, template=readme_default, test=False):
+def create_readmes(topdir, template=readme_default, test=False):
     '''
-    Given a base directory find the top level subdirectories. If there is a
-    README.yaml then do not replace it, if there is no README.yaml then
+    Given a top level directory find the top level subdirectories. If there
+    is a README.yaml then do not replace it, if there is no README.yaml then
     create one.
     '''
 
     found = [] # List of paths for found READMEs.
 
     # scandir returns an iterator of DirEntry objects for the given path.
-    subdirs = [ f.path for f in os.scandir(basedir) if f.is_dir() ]
+    subdirs = [ f.path for f in os.scandir(topdir) if f.is_dir() ]
 
     for dir in subdirs:
         doc = template + "Data Location: %s\n" % dir
@@ -100,14 +100,14 @@ def main():
 
     # Process the args. I do not like argparse.
     if len(sys.argv) < 2:
-        usage('Error: You need to specify a base directory. Exiting')
+        usage('Error: You need to specify a top level directory. Exiting')
     elif len(sys.argv) == 2:
-        basedir = sys.argv[1]
-        print('Processing %s ...' % basedir)
+        topdir = sys.argv[1]
+        print('Processing %s ...' % topdir)
     elif len(sys.argv) == 3:
-        basedir = sys.argv[1]
+        topdir = sys.argv[1]
         if sys.argv[2] == '-t' or sys.argv[2] == '--test':
-            print('Testing only %s' % basedir)
+            print('Testing only %s' % topdir)
             test = True
         else:
             usage('Error: Not a valid option: %s' % sys.argv[2])
@@ -115,14 +115,14 @@ def main():
         usage('Error: Too many args passed.')
         sys.exit()
 
-    # Check the basedir exists and is a directory.
-    if not os.path.isdir(basedir):
-        print('Error: you must supply a directory, %s is not a directory.' % basedir)
+    # Check the topdir exists and is a directory.
+    if not os.path.isdir(topdir):
+        print('Error: you must supply a directory, %s is not a directory.' % topdir)
         print('Exiting')
         sys.exit()
 
-    # Create READMEs under the base directory if they do not exist.
-    found = create_readmes(basedir, readme_default, test)
+    # Create READMEs under the top directory if they do not exist.
+    found = create_readmes(topdir, readme_default, test)
 
     if len(found) != 0:
         print('\nThe following directories already had a %s file so were not changed:' % readme)
