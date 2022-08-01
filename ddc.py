@@ -5,9 +5,9 @@ This is the Data Directory Cataloger. The purpose of it is to help manage numero
 directories of data by having a README.yaml in most directories and which stores
 metadata about the contents of that directory.
 
-This program expects a "base" directory as input.
+This program expects a "top level" directory as input.
 
-Under this base directory it then looks for subdirectories, but only ONE level down.
+Under this top level directory it then looks for subdirectories, but only ONE level down.
 In each first level subdirectory it looks for the README.yaml file that should describe
 the data under that subdirectory.
 
@@ -57,9 +57,9 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-def get_readmes(basedir):
+def get_readmes(topdir):
     '''
-    Given a base directory return two lists:
+    Given a top level directory return two lists:
     1. A found list of all directory paths that have a README.yaml
     2. A missing list of directory paths that do not have a README.yaml
     They are sorted alphabetically for the convenience of the user.
@@ -69,7 +69,7 @@ def get_readmes(basedir):
     missing = []    # List of paths missing READMEs.
 
     # scandir returns an iterator of DirEntry objects for the given path.
-    subdirs = [ f.path for f in os.scandir(basedir) if f.is_dir() ]
+    subdirs = [ f.path for f in os.scandir(topdir) if f.is_dir() ]
 
     for dir in subdirs:
         # Append the path to the directory to either the found list or the
@@ -259,11 +259,11 @@ def main():
 
     # Get the program args.
     args = parse_args()
-    basedir = args.directory
+    topdir = args.directory
 
     # This arg shoud be a directory.
-    if not os.path.isdir(basedir):
-        print('Error: you must supply a directory, %s is not a directory.' % basedir)
+    if not os.path.isdir(topdir):
+        print('Error: you must supply a directory, %s is not a directory.' % topdir)
         print('For help run: %s -h' % sys.argv[0])
         sys.exit()
 
@@ -271,14 +271,14 @@ def main():
     timenow = datetime.datetime.now().strftime('%Y-%m-%d at %I:%M %p')
 
     create_markdown_header(timenow)
-    print('# Directory `%s`' % basedir)
+    print('# Directory `%s`' % topdir)
 
     # The "data" variable is a dictionary. It's keys will be the README.yaml
     # file paths and the values are the YAML structures for that README.yaml
     data = {}
 
-    # Get all the READMEs under the base directory.
-    (found, missing) = get_readmes(basedir)
+    # Get all the READMEs under the top level directory.
+    (found, missing) = get_readmes(topdir)
 
     # Print info in Markdown format on the READMEs found or otherwise.
     if len(missing) != 0:
@@ -288,7 +288,7 @@ def main():
             print(' -', path)
 
     print('\n## Summary\n')
-    print('\nFound %d `%s` files in the directories under `%s`.' % (len(found), readme, basedir))
+    print('\nFound %d `%s` files in the directories under `%s`.' % (len(found), readme, topdir))
     if len(found) == 0:
         print('Exiting.')
         sys.exit()
