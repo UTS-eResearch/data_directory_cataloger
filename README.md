@@ -5,7 +5,7 @@ numerous directories by having a README.yaml in most directories and which
 stores metadata about the contents of that directory. Typical metadata that
 you would store might be "Description", "Data Manager" and "Disposal Date".
 
-When the `ddc.py` program is run on directory it looks for `README.yaml` files
+When the `ddc.py` program is run on a directory it looks for `README.yaml` files
 in the **immediate** sub-directories. From those `README.yaml` files it reads the
 metadata, and outputs a single Markdown document summarising the metadata in the READMEs.
 This Markdown doc can then be easily transformed to a HTML file (e.g. using `pandoc`)
@@ -40,10 +40,10 @@ Get brief help on the program:
 
     $ ./ddc.py -h
 
-Run the program on a single "top level" directory to find and parse the `README.yaml`
+Run the program on a single "top level" directory to find and parse the README.yaml
 files in the immediate sub-directories of that directory. For example our 
 `/shared/opt` directory contains a dozen sub-directories containing scientific software,
-and each of those directories contain a `README.yaml` file.
+and each of those directories contain a README.yaml file.
 
     $ ./ddc.py /shared/opt
 
