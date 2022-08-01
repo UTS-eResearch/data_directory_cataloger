@@ -48,35 +48,30 @@ directory `/shared/opt/`.
     Title: R version 3.4.4
     Description: R version 3.4.4. This is old and can be removed.
     Data Manager: Mike Lake
-    Data Location: /shared/opt/R-3.4.4
 
 /shared/opt/centos6/README.yaml
 
     Title: Old Centos 6 programs
     Description: Older programs compiled under Centos 6. They may work under Centos 8.
     Data Manager: Mike Lake
-    Data Location: /shared/opt/centos6/
 
 /shared/opt/fastqc-0.10.1/README.yaml
 
     Title: FastQC is a high throughput sequence QC analysis tool
     Description: FastQC reads a set of sequence files and produces from each one a quality control report. 
     Data Manager: Mike Lake
-    Data Location: /shared/opt/fastqc-0.10.1
 
 /shared/opt/gromacs-2018.8/README.yaml
 
     Title: GROMACS 2018.8
     Description: Molecular dynamics package mainly designed for simulations of proteins, lipids, and nucleic acids. Compiled with PBS MPI.
     Data Manager: Mike Lake
-    Data Location: /shared/opt/gromacs-2018.8
 
 /shared/opt/intel/README.yaml
 
     Title: Intel Compiler
     Description: Intel compiler version 2018
     Data Manager: Mike Lake
-    Data Location: /shared/opt/intel
 
 As you can see above we now have all the metadata describing each sub-directory in the READMEs.
 

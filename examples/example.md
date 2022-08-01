@@ -22,7 +22,6 @@ Found 5 README.yaml files in the directories under /shared/opt/. A summary of th
 The following are all the 5 metadata attributes found in the README.yaml files.
 These should all be unique. If not edit and correct the README.yaml files.
 
- - Data Location
  - Data Manager
  - Description
  - Directory
