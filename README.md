@@ -27,12 +27,19 @@ Example: `/shared/opt/fastqc-0.10.1/README.yaml`
     Title: FastQC is a high throughput sequence QC analysis tool
     Description: FastQC reads a set of sequence files and produces a quality control report.
     Data Manager: Mike Lake
-    Data Location: /shared/opt/fastqc-0.10.1
-
-The README.yaml should be in StrictYAML format (https://github.com/crdoconnor/strictyaml).
-
+ 
+In each sub-directory the README.yaml keys are metadata fields and their values
+describe the contents of the sub-directory.
 The keys used in the YAML should be named the same as what is available in any
 Data Management Plans that you may be using.
+
+The README.yaml files should contain the same metadata fields for each sub-directory 
+*at the same level*. The idea being is that each sub-directory at a given level are 
+in some way related and would have the same required metadata fields. The DDC program
+looks at all the keys and if any README.yaml file is missing a key then that is
+flagged as a warning that a metadata field might be missing.
+
+The README.yaml should be in StrictYAML format (https://github.com/crdoconnor/strictyaml).
 
 ## How to run the DDC Program
 
@@ -52,7 +59,7 @@ or
     $ cd /shared/opt
     $ /pathto/ddc.py .
 
-It will print a single Mardown document containing the metadata in the READMEs. 
+It will print a single Markdown document containing the metadata in the READMEs. 
 
 We actually need to save this output so it can be converted to a HTML page so
 redirect it to a file:
@@ -64,13 +71,25 @@ Now you can use a utility like `pandoc` to convert the Markdown to a HTML page:
     $ pandoc --css=styles.css --self-contained CATALOG.md > CATALOG.html
 
 See the examples directory in this repo for an example of running this on our
-`/shared/opt/` directory. This alsp contains an example `styles.css` file.
+`/shared/opt/` directory. This also contains an example `styles.css` file.
 
 Of course most users will have many directories to manage. A better option is to
 run a bash script that runs this script over those directories, and combining the
 Markdown docs into a website using a static site generator like MkDocs 
 https://www.mkdocs.org. A short example of such a script is included and an 
 example `mkdocs.yml` file.
+
+## Sections in the Markdown Document Output
+
+The "Summary" section of the Markdown document will summarize some of the metadata fields.
+This will always show the *Directory* that each README.yaml file was found in. 
+Not all README metadata field will be shown. You can add other metadata fields if you wish.
+
+The "Metadata Information" section will contain a list of all the metadata fields
+found for this level of sub-directories.
+
+A "Metadata Warnings" section will be shown if there are README.yaml files that
+are possibly missing a metadata field, or if a sub-directory is missing a README.yaml
 
 ## Writing your Initial README.yaml Files 
 
