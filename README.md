@@ -74,15 +74,17 @@ example `mkdocs.yml` file.
 
 ## Writing your Initial README.yaml Files 
 
-This short script just saves a bit of time by writing a README.yaml
-file into each of the sub-directories. The text of the README.yaml file
-that will be written is in the script. You can edit it to change the text.
+This short script can save a lot of time by writing a README.yaml
+file into each of the immediate sub-directories of a top level directory.
+The text of the README.yaml file that will be written is in the script. 
+You need to edit it to change the text.
 
-    $ ./write_readmes.py
+    $ ./write_readmes.py top_level-directory
 
 ## FAQ
 
-Why does this script not recurse? It only looks for README.yaml files in the immediate subdirectories.
+Why does this script not recurse? It only looks for README.yaml files in the
+immediate subdirectories.
 
 > The purpose of this script is to manage large amounts of data. There might be
 > hundreds or thousands of directories. The directories might contain millions of files.
@@ -97,8 +99,8 @@ Why use plain text README.yaml files? A database is faster.
 > moved then the connection with the data is broken. You would need to update the
 > database.
 
-What happens if this script can no longer run? Python changes and this script might not run with
-Python 4 or later.
+What happens if this script can no longer run? Python changes and this script might
+not run with Python 4 or later.
 
 > If you cannot run this script anymore nothing really breaks.
 > Future researchers or data managers will see be able to find and understand the data's
@@ -106,8 +108,8 @@ Python 4 or later.
 >
 > - The README.yaml files will still remain with the data in their directories.
 > - The generated markdown files will readable.
-> - The static web pages are still likely to be readable with any HTML browser even if they are not
->   being served by a web server.
+> - The static web pages are still likely to be readable with any HTML browser even 
+>   if they are not being served by a web server.
 
 ## License
 
