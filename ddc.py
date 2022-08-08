@@ -102,7 +102,11 @@ def parse_readmes(found):
                 # Especially as this program might be run as the root user.
                 doc = yaml.safe_load(stream)
             except yaml.YAMLError as e:
+                print('')
+                print('<span style="color:red">')
                 print('Error in reading YAML file: ', e)
+                print('</span>')
+                print('')
 
         # Debugging lines
         #print('---------------------------')
