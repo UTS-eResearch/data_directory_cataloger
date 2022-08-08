@@ -44,6 +44,9 @@ If not, see <https://www.gnu.org/licenses/>.
 # README.yaml then you might use CATALOG.yaml.
 readme='README.yaml'
 
+# This will be automatically updated by the install script.
+version = "VERSION_STRING"
+
 import argparse, os, sys
 import yaml, datetime
 
