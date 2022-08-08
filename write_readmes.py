@@ -47,7 +47,7 @@ def usage(msg=None):
         print(msg)
     sys.exit()
 
-def create_readmes(topdir, template=readme_default, test=False):
+def create_readmes(topdir, doc=readme_default, test=False):
     '''
     Given a top level directory find the top level subdirectories. If there
     is a README.yaml then do not replace it, if there is no README.yaml then
@@ -60,7 +60,6 @@ def create_readmes(topdir, template=readme_default, test=False):
     subdirs = [ f.path for f in os.scandir(topdir) if f.is_dir() ]
 
     for dir in subdirs:
-        doc = template + "Data Location: %s\n" % dir
         file = os.path.join(dir, readme)
 
         # Debugging lines that can be uncommented.
