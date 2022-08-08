@@ -92,6 +92,11 @@ TODAY=$(date "+%Y.%m.%d")   # Todays date, 2013.12.26
 if [ -f ${dest}/ddc.py ] && [ ! -f ${dest}/ddc_${TODAY}.py ]; then
     echo "Copying ddc.py to backup."        
     cp ${dest}/ddc.py ${dest}/ddc_${TODAY}.py
+    if [ $? -ne 0 ]; then
+        echo "Could not create backup."
+        echo "Perhaps you need to use sudo. Exiting."
+        exit 0
+    fi            
 fi        
 
 # Copy the programs to the destination.
