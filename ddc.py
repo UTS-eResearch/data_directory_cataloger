@@ -202,11 +202,18 @@ def create_markdown_header(timenow):
     metadata = '''\
 ---
 pagetitle: %s
-creator: %s
+creator: %s version %s
 date: %s
----''' % ('Data Directory Cataloger', sys.argv[0], timenow)
+---''' % ('Data Directory Cataloger', sys.argv[0], version, timenow)
 
     print(metadata)
+    
+def create_markdown_footer(version, timenow):
+    '''
+    Stuff to be printed at the end of each page.
+    '''
+    print('\nCreated by DDC version %s.' % version)
+    print('This page last updated on %s' % timenow)
 
 def create_markdown_table(columns, data):
     '''
@@ -315,7 +322,7 @@ def main():
     # Check the metadata in these READMEs for consistency.
     check_metadata(data, metadata)
 
-    print('\nThis page last updated on %s' % timenow)
+    create_markdown_footer(version, timenow)
 
 if __name__ == '__main__':
     main()
