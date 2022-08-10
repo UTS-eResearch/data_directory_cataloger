@@ -1,14 +1,14 @@
 # Detailed Usage
 
-This covers some details on how you would use the Data Directory Cataloger to manage 
+This covers some details on how you would use the Data Directory Cataloger to manage
 a collection of data directories. In this example I'm using my `hpc_examples` directory.
-This contains examples for a High Performanmce Computer cluster.
+This contains example scripts for a High Performance Computer cluster.
 
 ## Other Metadata Fields One Could Use
 
-* Maintainer: 
+* Maintainer:
 * Provenance: Downloaded from xxx on 2020.01.01
-* RDMP link: 
+* RDMP link:
 * Data retention and disposal:
 * Minimum retention period:
 
@@ -42,13 +42,66 @@ To see what README.yaml files just contain the field "Earliest possible disposal
 in a compact manner we can use:
 
     $ for f in `find . -maxdepth 2 -name README.yaml`; do echo -n "$f  "; cat $f | grep Earliest || echo ''; done
-    ./job_arrays/README.yaml  
+    ./job_arrays/README.yaml
     ./mpi/README.yaml  Earliest possible disposal date: 2024
-    ./primes/README.yaml  
+    ./primes/README.yaml
 
 ## Adding a Field
 
-TODO
+We can see below that most of my README.yaml files are missing the "Earliest
+possible disposal date" field. I'd like to append this to the files that are
+missing this field.
+
+    hpc_examples/$ for f in `find . -maxdepth 2 -name README.yaml`; do echo -n "$f  "; cat $f | grep disposal || echo ''; done
+    ./.git/README.yaml  
+    ./primes/README.yaml  
+    ./job_arrays/README.yaml  
+    ./mpi/README.yaml  Earliest possible disposal date: 2024
+    ./profiling/README.yaml  
+    ./checkpointing_dmtcp/README.yaml  
+    ./overtime/README.yaml  
+    ./cuda/README.yaml  
+    ./README.yaml  Earliest possible disposal date: 2024
+    ./matlab/README.yaml  
+
+Just create a bash script like this:    
+
+    #!/bin/bash
+    
+    # Add a line to all README.yaml files in the immediate subdirectories.
+    
+    # Set the variable "add" to the line that you wish to add.
+    # Do not forget the colon. Example:
+    #   add="Earliest possible disposal date: 2024"
+    add="Earliest possible disposal date: 2024"
+    
+    files=$(find . -mindepth 2 -maxdepth 2 -name README.yaml)
+    for f in $files; do
+        grep "$add" $f > /dev/null
+        if [ $? -eq 0 ]; then
+            # This file already contains this line.
+            continue
+        fi
+        echo "Added to $f"
+        echo "$add" >> $f
+    done
+
+Run it.
+
+    $ ./ddc_field_add.sh 
+    Added to ./.git/README.yaml
+    Added to ./primes/README.yaml
+    Added to ./job_arrays/README.yaml
+    Added to ./profiling/README.yaml
+    Added to ./checkpointing_dmtcp/README.yaml
+    Added to ./overtime/README.yaml
+    Added to ./cuda/README.yaml
+    Added to ./matlab/README.yaml
+
+Done. If you run it again nothing will be changed.
+
+    $ ./ddc_field_add.sh
+    $ 
 
 ## Removing a Field
 
@@ -73,7 +126,7 @@ the field that I wish to remove.
     ./pbs_logs/README.yaml  Minimum retention period: 2 years
     ./pbs_job_examples/README.yaml  Minimum retention period: 2 years
     ./pbs_manuals/README.yaml  Minimum retention period: 2 years
-    $ 
+    $
 
 This also picked up the README in the current directory. To exclude this we can add a`-mindepth 2`
 to the find command.
@@ -100,7 +153,7 @@ This should remove the "Minimum retention ..." line:
     Title: ANSYS Finite Element Analysis Software
     Description: This Finite Element Analysis Software is an old version and can be removed.
     Data Manager: Mike Lake
-    
+     
     Earliest possible disposal date: 2023
 
 Oh. Looks like we would end up with a blank line in there. We don't want that.
@@ -116,7 +169,7 @@ We will just add another sed to remove the blank line:
     Data Manager: Mike Lake
     Earliest possible disposal date: 2023
 
-This works so now try the fix on one file by adding the `-i` option to sed:
+This works, so now try the fix on one file by adding the `-i` option to sed:
 
     $ sed -i -e 's/^Minimum retention period:.*$//' -e '/^$/d' ./ansys/README.yaml
 
@@ -124,28 +177,30 @@ Now we can do the fix for all the README files! But instead of the long one-line
 
     for f in `find . -mindepth 2 -maxdepth 2 -name README.yaml`; do sed -i -e 's/^Minimum retention period:.*$//' -e '/^$/d' $f;  done
 
-Place this into a bash script (e.g. `remove_field.sh`) and make it executable and run that.
+Place this into a bash script (e.g. `ddc_field_remove.sh`) and make it executable and run that.
 Its been modified so its easier to reuse another time. Note double quotes to allow variable
 interpolation in the first sed replace.
 
     #!/bin/bash
     # Remove a line from all README.yaml files in the immediate subdirectories.
 
-    # Set the variable replace to the full field name that you wish to be removed.
+    # Set the variable replace to the field name that you wish to be removed,
+    # upto and including the ':'.
     replace='Minimum retention period:'
 
     files=$(find . -mindepth 2 -maxdepth 2 -name README.yaml)
-    for f in $files; do 
+    for f in $files; do
         sed -i -e "s/^${replace}.*$//" -e '/^$/d' $f
     done
 
-There should be no output if all goes OK.
+There should be no output if all goes OK. No harm done if you accidentally run
+it again, nothing will be changed.
 
-    $ ./remove_field.sh
+    $ ./ddc_field_remove.sh
     $
 
 Now just repeat the command that printed the READMEs and check they all look OK.
-    
+
     $ for f in `find . -maxdepth 2 -name README.yaml`; do echo -n "$f  "; cat $f | grep retention || echo ''; done
 
 If you are certain that all is OK then you can now remove the `README_backups.tar`.
