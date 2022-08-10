@@ -43,7 +43,8 @@ program. If not, see <https://www.gnu.org/licenses/>.
 # README.yaml then you might use CATALOG.yaml.
 readme='README.yaml'
 
-# This will be automatically updated by the install script.
+# The version string will be automatically updated by the install script from the git repo.
+# We use Semantic Versioning https://semver.org/spec/v2.0.0.html
 version = "VERSION_STRING"
 
 import argparse, os, sys

@@ -36,13 +36,14 @@ function get_version {
     #
     description=$(git describe --long)
     version_num=$(echo $description | cut -d '-' -f1)  # e.g. v2.0.0
-    num_commits=$(echo $description | cut -d '-' -f2)  # e.g. 6
+    num_commits=$(echo $description | cut -d '-' -f2)  # e.g. 71
+    commit_hash=$(echo $description | cut -d '-' -f3)  # e.g. g1d02627
     if [ $num_commits -eq 0 ]; then
         # This is a tagged release.
         version_string=$version_num
     else
         # This version has commits after the last tagged release.
-        version_string=$description
+        version_string="$version_num + $num_commits ($commit_hash)"
     fi
 }
 
