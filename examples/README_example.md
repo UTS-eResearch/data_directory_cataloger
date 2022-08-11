@@ -73,7 +73,7 @@ directory `/shared/opt/`.
     Description: Intel compiler version 2018
     Data Manager: Mike Lake
 
-As you can see above we now have all the metadata describing each sub-directory in the READMEs.
+As you can see above the READMEs contain the metadata describing each sub-directory in the READMEs.
 
 ## Run the DDC Program
 
