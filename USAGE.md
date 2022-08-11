@@ -180,17 +180,19 @@ Now we can do the fix for all the README files! But instead of the long one-line
 Place this into a bash script (e.g. `ddc_field_remove.sh`) and make it executable and run that.
 Its been modified so its easier to reuse another time. Note double quotes to allow variable
 interpolation in the first sed replace.
+Also if you remove the -i you can see what would be done as a dry-run. 
 
     #!/bin/bash
     # Remove a line from all README.yaml files in the immediate subdirectories.
 
-    # Set the variable replace to the field name that you wish to be removed,
-    # upto and including the ':'.
-    replace='Minimum retention period:'
+    # Set the variable remove to the field name that you wish to be removed,
+    # upto and including the ':'. Do not include the value.
+    remove='Minimum retention period:'
 
     files=$(find . -mindepth 2 -maxdepth 2 -name README.yaml)
     for f in $files; do
-        sed -i -e "s/^${replace}.*$//" -e '/^$/d' $f
+        # If you remove the -i you can see what would be done. 
+        sed -i -e "s/^${remove}.*$//" -e '/^$/d' $f
     done
 
 There should be no output if all goes OK. No harm done if you accidentally run
