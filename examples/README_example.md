@@ -1,14 +1,18 @@
 # README for this Example
 
-In this directory is an example of what the web page which describes
-the software under our directory for shared optional programs looks like. 
-Open `example.html` in your web browser. Below is a description of how it
-was generated.
+In this directory is an example of what a single web page, which describes
+the contents under one directory, can look like. Open `example.html` in your web browser.
+See [A Single Webpage for One Directory](#a-single-webpage-for-one-directory)
+for a detailed description of how it was generated.
 
-## Our Directory `/shared/opt/`
+See [A MkDocs Website for Multiple Directories](#a-mkdocs-website-for-multiple-directories)
+which shows what our website looks like for multiple directories.
 
-Our top level directory of shared optional programs under `/shared/opt/` 
-contains software directories like the list below:
+## A Single Webpage for One Directory
+
+This example shows how to create single webpage describing the directories below
+our `/shared/opt/` directory. This contains shared optional programs for our HPC.
+The contents of this directory is like the list below:
 
     $ ls -1 /shared/opt/
     centos6
@@ -27,7 +31,9 @@ contains software directories like the list below:
     openmpi-4.1.2
     R-3.4.4
 
-## Write the README.yaml Files
+We need to create a README.yaml file under each of these directories.
+
+### Write the README.yaml Files
 
 This short script just saves a bit of time by writing a README.yaml
 file into each of the sub-directories. The text of the README.yaml file
@@ -38,7 +44,7 @@ For this example nothing needed to be changed so it was just run.
 
 Each of the top level directories now contains a README.yaml file.
 
-## The README.yaml files under `/shared/opt/`
+### The README.yaml files under `/shared/opt/`
 
 These are what some of the README.yaml files now look like under the
 directory `/shared/opt/`.
@@ -75,14 +81,14 @@ directory `/shared/opt/`.
 
 As you can see above the READMEs contain the metadata describing each sub-directory in the READMEs.
 
-## Run the DDC Program
+### Run the DDC Program
 
 I then ran the Data Directory Cataloger program over the top level directory directory, directing
 the output to `example.md`:
     
     $ ./ddc.py /shared/opt > example.md
 
-## Use pandoc to Create a Webpage
+### Use pandoc to Create a Webpage
 
 Then I used "pandoc" to convert the "example.md" Markdown document into the
 "example.html" HTML page. 
@@ -95,6 +101,19 @@ into the head of the doc. Hence it will not require the separate styles.css
 file to be present when viewing the web page.
 
 You can install `pandoc` from your Linux distribution's repositories.
+
+## A MkDocs Website for Multiple Directories
+
+The image here shows our eResearch website which was created using the Data
+Directory Cataloger to process several directories, creating a Markdown file
+for each directory, and combining those Markdown files into a single web site
+using the static website generator MkDocs. 
+
+The website is updated by the script `update_mkdocs_site.sh`.
+
+<p align="center" width="100%" style="text-align:center;">
+<img src="examples/mkdocs_screenshot.png" alt="MkDocs site example" width="80%" style="border: 1px solid black;"/>
+</p>
 
 Mike Lake    
 June 2022
