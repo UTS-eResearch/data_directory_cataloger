@@ -16,8 +16,6 @@ The output is a list of the README.yaml files found and/or created.
     path_to/write_readmes.py top_directory [-t]
 
 To change the contents of the README.yaml you will need to edit this script.
-    
-TODO: An optional README template e.g. -r README_opt.yaml
 
 Mike Lake
 '''
@@ -26,8 +24,6 @@ Mike Lake
 readme='README.yaml'
 
 # This is the template for the README.yaml that will be written.
-# This program will automatically add a "Data Location" field 
-# to the end of this template. So do not add one here.
 # Note you will also want a trailing space after each ":".
 readme_default = '''\
 Title: 
