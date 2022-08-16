@@ -1,12 +1,15 @@
-# README for this Example
+# README for these Examples
 
-In this directory is an example of what a single web page, which describes
-the contents under one directory, can look like. Open `example.html` in your web browser.
+In this directory are some examples of the output of the Data Directory Cataloger.
+
+The first example is a single web page which describes the contents under one
+directory. Open `example.html` in your web browser.    
 See [A Single Webpage for One Directory](#a-single-webpage-for-one-directory)
 for a detailed description of how it was generated.
 
+The second example is a screenshot of a website which describes the contents
+of multiple directories.    
 See [A MkDocs Website for Multiple Directories](#a-mkdocs-website-for-multiple-directories)
-which shows what our website looks like for multiple directories.
 
 ## A Single Webpage for One Directory
 
