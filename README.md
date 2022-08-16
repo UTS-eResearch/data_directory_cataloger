@@ -7,7 +7,7 @@ you would store might be "Description", "Data Manager" and "Disposal Date".
 
 When the `ddc.py` program is run on a directory it looks for `README.yaml` files
 in the **immediate** subdirectories. From those `README.yaml` files it reads the
-metadata, and outputs a single Markdown document listing each subdirectorie and
+metadata, and outputs a single Markdown document listing each subdirectory and
 summarising the metadata in its README.
 This Markdown doc can then be easily transformed to a HTML file (e.g. using `pandoc`)
 which will provide a single point of information about the contents of the directories.
