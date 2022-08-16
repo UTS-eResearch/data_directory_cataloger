@@ -4,6 +4,11 @@ This covers some details on how you would use the Data Directory Cataloger to ma
 a collection of data directories. In this example I'm using my `hpc_examples` directory.
 This contains example scripts for a High Performance Computer cluster.
 
+* [Other Metadata Fields One Could Use](#other-metadata-fields-one-could-use)
+* [Looking at README.yaml Files](#looking-at-readmeyaml-files)
+* [Adding a Field](#adding-a-field)
+* [Removing a Field](#removing-a-field)
+
 ## Other Metadata Fields One Could Use
 
 * Maintainer:
