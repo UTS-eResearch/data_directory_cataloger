@@ -21,6 +21,8 @@ files which describe the data and who manages it. The README.yaml files can be a
 be programatically searched for metadata such as the data manager or data disposal
 dates.
 
+See the [Examples Readme](examples/README_examples.md) for a example HTML page and a screenshot.
+
 ## What a README.yaml Looks Like
 
 Example: `/shared/opt/fastqc-0.10.1/README.yaml`
