@@ -4,11 +4,14 @@ This covers some details on how you would use the Data Directory Cataloger to ma
 a collection of data directories. In this example I'm using my `hpc_examples` directory.
 This contains example scripts for a High Performance Computer cluster.
 
+* [What a README.yaml Looks Like](#what-a-readmeyaml-looks-like)
+* [Writing your Initial README.yaml Files](#writing-your-initial-readmeyaml-files)
+* [How to run the DDC Program](#how-to-run-the-ddc-program)
+* [Sections in the Markdown Document Output](#sections-in-the-markdown-document-output)
 * [Other Metadata Fields One Could Use](#other-metadata-fields-one-could-use)
 * [Looking at README.yaml Files](#looking-at-readmeyaml-files)
 * [Adding a Field](#adding-a-field)
 * [Removing a Field](#removing-a-field)
-
 
 ## What a README.yaml Looks Like
 
@@ -30,6 +33,15 @@ looks at all the keys and if any README.yaml file is missing a key then that is
 flagged as a warning that a metadata field might be missing.
 
 The README.yaml should be in StrictYAML format (https://github.com/crdoconnor/strictyaml).
+
+## Writing your Initial README.yaml Files 
+
+This short script can save a lot of time by writing a README.yaml
+file into each of the immediate subdirectories of a top level directory.
+The text of the README.yaml file that will be written is in the script. 
+You need to edit it to change the text.
+
+    $ ./write_readmes.py top_level-directory
 
 ## How to run the DDC Program
 
@@ -86,15 +98,6 @@ each subdirectory at the same level has the same fields.
 A "**Metadata Warnings**" section will be shown at the top of the page if there are
 README.yaml files that are possibly missing a metadata field, or if a
 subdirectory is missing a README.yaml file.
-
-## Writing your Initial README.yaml Files 
-
-This short script can save a lot of time by writing a README.yaml
-file into each of the immediate subdirectories of a top level directory.
-The text of the README.yaml file that will be written is in the script. 
-You need to edit it to change the text.
-
-    $ ./write_readmes.py top_level-directory
 
 ## Other Metadata Fields One Could Use
 
