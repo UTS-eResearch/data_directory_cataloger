@@ -1,27 +1,12 @@
 /* Example styles */
 
-body {
-  margin: 2ex;
-  padding: 0;
-}
+body { margin: 2ex; padding: 0; }
 
 /* Code needs to be a bit bigger but not as much within a heading. */
 h1 code { font-size: 120%; color: #333333; }
 code { font-size: 124%; }
 
-table {
-    border: 1px solid #666666;
-    border-collapse: collapse;
-}
-
-table th {    
-    background-color: #cedede;
-}
-
-table th, td {
-    padding: 1ex;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #666666;
-}
+table { border-collapse: collapse; }
+table th { background-color: #cedede; }
+table th,td { border: 1px solid #666666; padding:1ex; }
 
