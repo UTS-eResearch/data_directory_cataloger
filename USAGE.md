@@ -12,6 +12,7 @@ This contains example scripts for a High Performance Computer cluster.
 * [Looking at README.yaml Files](#looking-at-readmeyaml-files)
 * [Adding a Field](#adding-a-field)
 * [Removing a Field](#removing-a-field)
+* [Modifying a Field](#modifying-a-field)
 
 ## What a README.yaml Looks Like
 
