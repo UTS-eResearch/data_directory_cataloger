@@ -110,13 +110,13 @@ subdirectory is missing a README.yaml file.
 ## Looking at README.yaml Files
 
 Find all the README.yaml files under just the immediate subdirectories.
+The `-mindepth 2` is added to the find command so it will not pick up
+any README in the current directory.
 
     $ find . -mindepth 2 -maxdepth 2 -name README.yaml
     ./job_arrays/README.yaml
     ./mpi/README.yaml
     ./primes/README.yaml
-
-We added a `-mindepth 2` to the find command so it would not pick up any README in the current directory.
 
 This is how to quickly look at all the README.yaml files under the immediate subdirectories.
 
@@ -161,7 +161,7 @@ append this to the files that are missing this field.
     ./README.yaml  Earliest possible disposal date: 2024
     ./matlab/README.yaml  
 
-*Well there is a script to do that for you!* Under `useful_scripts` you will find
+*Well there is a script to do that for you!* &nbsp; Under `useful_scripts` you will find
 `ddc_field_add.sh`. Edit that and insert into there the string that you wish to
 add.
 
@@ -190,7 +190,7 @@ Done. If you run it again nothing will be changed.
 
 ## Removing a Field
 
-*Well there is also a script to help you do this!* Under `useful_scripts` you
+*Well there is also a script to help you do this!* &nbsp; Under `useful_scripts` you
 will find `ddc_field_remove.sh`. Edit that and insert into there the string
 that you wish to remove.
 
