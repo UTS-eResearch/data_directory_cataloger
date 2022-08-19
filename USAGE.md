@@ -245,3 +245,22 @@ Now just repeat the command that printed the READMEs and check they all look OK.
 
 If you are certain that all is OK then you can now remove the `README_backups.tar`.
 
+## Modifying a Field
+
+*Yes there is a script to help you do this!*
+
+Under `useful_scripts` you will find `ddc_field_modify.sh`. Edit that and
+set there the strings that you wish to modify.
+
+Make sure you change into the top level directory above the subdirectories that
+need their README.yaml files modified. 
+
+Make a backup as shown above, then run the script.
+
+    $ path_to/ddc_field_modify.sh
+    Changed ./primes/README.yaml
+    Changed ./job_arrays/README.yaml
+    Changed ./mpi/README.yaml
+
+You can use the example find commands above to look at the READMEs before and after the change.
+
