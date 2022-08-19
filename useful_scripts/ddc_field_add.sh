@@ -7,8 +7,8 @@
 
 # Set the variable "add" to the "name: value" line that you wish to add.
 # Do not forget the colon. Example:
-#   add="Earliest possible disposal date: 2024"
-add='Minimum Retention Period: 2 years'
+#    add="Earliest possible disposal date: 2024"
+add='Earliest possible disposal date: 2024'
 
 files=$(find . -mindepth 2 -maxdepth 2 -name README.yaml)
 for f in $files; do
