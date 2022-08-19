@@ -16,6 +16,7 @@ for f in $files; do
         # The first sed pattern will match on the "remove" string,
         # at the start of the line, and anything following!
         # The second sed pattern will remove the blank line.
+        # Also, if you remove the -i you can see what would be done as a dry-run.
         sed -i -e "s/^${remove}.*$//" -e '/^$/d' $f
         echo "Removed from $f"
     fi
