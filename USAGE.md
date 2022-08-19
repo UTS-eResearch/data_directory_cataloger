@@ -248,7 +248,7 @@ If you are certain that all is OK then you can now remove the `README_backups.ta
 
 ## Modifying a Field
 
-*Yes there is a script to help you do this!*
+*Yes, there is a script to help you do this!*
 
 Under `useful_scripts` you will find `ddc_field_modify.sh`. Edit that and
 set there the strings that you wish to modify.
