@@ -100,7 +100,6 @@ def parse_readmes(found):
         with open(file, 'r') as stream:
             try:
                 # Note here, use safe_load() and not load()! Do not trust user input!
-                # Especially as this program might be run as the root user.
                 doc = yaml.safe_load(stream)
             except yaml.YAMLError as e:
                 print('')
