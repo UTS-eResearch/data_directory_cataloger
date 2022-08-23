@@ -47,6 +47,8 @@ readme='README.yaml'
 # We use Semantic Versioning https://semver.org/spec/v2.0.0.html
 version = "VERSION_STRING"
 
+DEBUG = False
+
 import argparse, os, sys
 import yaml, datetime
 
@@ -118,6 +120,44 @@ def parse_readmes(found):
 
         # Add this YAML doc to the data dictionary with the directory path as the key.
         data[dir] = doc
+
+    return data
+
+def sanitise_deny(data):
+
+    # The set of characters to be replaced needs to be a dictionary.
+    # For the key specify the single character to be replaced, and
+    # for its value specify its replacement character. This can be None.
+    deny_list = {
+        '<':'&lt;',
+        '>':'&gt;',
+        '{':'',
+        '}':'',
+        '(':'',
+        ')':'',
+        ';':'' }
+    # str.maketrans takes a dictionary. For the key specify the single character
+    # to be replaced, and for its value specify its replacement. 
+    # It returns a translation table usable for str.translate().
+    trans_table = str.maketrans(deny_list)
+
+    for path in data.keys():
+        doc = data[path]  # Each doc is a single row in the Markdown table.
+        sanitised = False
+        for key in doc.keys():
+            # We don't need to check the keys are they are the directory paths,
+            # found and entered by this program. We do have to check all the values.
+            # TODO Can this can be turned into a list comprehension?
+            value = doc[key]
+            if type(value) == str:
+                value_sanitised = value.translate(trans_table)
+                if value_sanitised != value:
+                    doc[key] = value_sanitised
+                    sanitised = True
+                    if DEBUG:
+                        print('DEBUG: ', value, ' ==> ', value_sanitised)
+        if sanitised:
+            data[path] = doc
 
     return data
 
@@ -308,6 +348,7 @@ def main():
 
     # Parsing these README YAML docs.
     data = parse_readmes(found)
+    data = sanitise_deny(data)
 
     print('A summary of the metadata in these files follows.')
     # Place in this list the keys that you wish to print out.
