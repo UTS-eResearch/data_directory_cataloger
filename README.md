@@ -23,6 +23,22 @@ dates.
 
 See the [Examples Readme](examples/README_examples.md) for a example HTML page and a screenshot.
 
+## Requirements
+
+Python 3.6.8 or later with PyYAML 6.0 is required for the basic `ddc.py` program.
+The `write_readmes.py` program does not require any extra Python modes.
+
+If you wish to create a MkDocs site then you will meed to install the `mkdocs` module
+and perhaps a module for whatever theme you wish to use. For instance I have the 
+following mkdocs modules installed:
+
+    mkdocs==1.3.0
+    mkdocs-macros-plugin==0.7.0
+    mkdocs-material==8.2.11
+
+It is best to install these into a Python virtual environment which can be sourced
+before running the programs. See the `update_mkdocs_site.sh` as an example.
+
 ## License
 
 Copyright 2022 Mike Lake     
