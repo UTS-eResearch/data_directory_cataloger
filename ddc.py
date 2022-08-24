@@ -53,7 +53,8 @@ import argparse, os, sys
 import yaml, datetime
 
 def parse_args():
-    ''' There is one mandatory arg (a directory) and no optional args.
+    ''' 
+    There is one mandatory arg (a directory) and no optional args.
     '''
 
     parser = argparse.ArgumentParser( \
@@ -123,7 +124,16 @@ def parse_readmes(found):
 
     return data
 
-def sanitise_deny(data):
+def sanitise_data(data):
+    '''
+    Users provide the content for the README.yaml files, these in turn are processed,
+    and the data ends up on a web page. There is potential here for misuse. We already
+    use safe_load only, which just loads subset of the YAML language safely, but users
+    could still insert javascript into the YAML files. Here we look for several chars
+    that might indicate javascript content and replace or strip them out. This might
+    cause some inconvenience to users.
+    TODO If characters are replaced tell the user in the "Warnings" section.
+    '''
 
     # The set of characters to be replaced needs to be a dictionary.
     # For the key specify the single character to be replaced, and
@@ -147,7 +157,7 @@ def sanitise_deny(data):
         for key in doc.keys():
             # We don't need to check the keys are they are the directory paths,
             # found and entered by this program. We do have to check all the values.
-            # TODO Can this can be turned into a list comprehension?
+            # TODO Can this can be turned into a list comprehension using a small function?
             value = doc[key]
             if type(value) == str:
                 value_sanitised = value.translate(trans_table)
@@ -346,9 +356,11 @@ def main():
         print('Exiting.')
         sys.exit()
 
-    # Parsing these README YAML docs.
+    # Parse these README YAML docs into a data structure.
     data = parse_readmes(found)
-    data = sanitise_deny(data)
+
+    # Sanitise the data as this is user input.
+    data = sanitise_data(data)
 
     print('A summary of the metadata in these files follows.')
     # Place in this list the keys that you wish to print out.
