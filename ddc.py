@@ -49,7 +49,7 @@ version = "VERSION_STRING"
 
 DEBUG = False
 
-import argparse, os, sys
+import argparse, os, sys, copy
 import yaml, datetime
 
 def parse_args():
@@ -146,26 +146,50 @@ def sanitise_data(data):
         '(':'',
         ')':'',
         ';':'' }
+
     # str.maketrans takes a dictionary. For the key specify the single character
     # to be replaced, and for its value specify its replacement. 
     # It returns a translation table usable for str.translate().
     trans_table = str.maketrans(deny_list)
 
     for path in data.keys():
+        # We don't need to check the keys in the data dictionary as they
+        # are the directory paths, found and entered by this program.
+        # The values in the data dictionary are the YAML docs, each one being a
+        # dictionary. We have to check theirs keys and values.
+
         doc = data[path]  # Each doc is a single row in the Markdown table.
         sanitised = False
-        for key in doc.keys():
-            # We don't need to check the keys are they are the directory paths,
-            # found and entered by this program. We do have to check all the values.
+
+        # We have to make a shallow copy, otherwise we get a RuntimeError;
+        # "dictionary changed size during iteration".
+        # Also, sanitise the keys in a separate iteration to the values.
+        doc_copy = copy.copy(doc)
+        for key in doc_copy.keys():
+            value = doc[key]
+            # We do have to check all the keys and values in each "doc"
             # TODO Can this can be turned into a list comprehension using a small function?
+            key_sanitised = key.translate(trans_table)
+            if key_sanitised != key:
+                doc[key_sanitised] = value  # Insert a new key, with old keys value.
+                doc.pop(key)                # Remove the old key.
+                sanitised = True
+                #print('WARNING KEY REPLACED: ', path, ' '.join(deny_list.keys()), '    ')
+                if DEBUG:
+                    print('DEBUG KEY REPLACED: ', key, '==>', key_sanitised)
+
+        for key in doc.keys():
             value = doc[key]
             if type(value) == str:
+                # We have to check its a string as a user could have just a numeric value here.
                 value_sanitised = value.translate(trans_table)
                 if value_sanitised != value:
                     doc[key] = value_sanitised
                     sanitised = True
+                    #print('WARNING VALUE REPLACED: ', path, ' '.join(deny_list.keys()), '    ')
                     if DEBUG:
-                        print('DEBUG: ', value, ' ==> ', value_sanitised)
+                        print('DEBUG VALUE REPLACED: ', value, ' ==> ', value_sanitised)
+
         if sanitised:
             data[path] = doc
 
@@ -364,7 +388,7 @@ def main():
 
     print('A summary of the metadata in these files follows.')
     # Place in this list the keys that you wish to print out.
-    # Capitisation is important. They have to match the keys in your README YAML files.
+    # Capitalisation is important. They have to match the keys in your README YAML files.
     columns = ['Title', 'Description', 'Data Manager']
     create_markdown_table(columns, data)
 
