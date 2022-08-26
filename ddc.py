@@ -39,9 +39,24 @@ program. If not, see <https://www.gnu.org/licenses/>.
 
 # Filename of the README in each directory that contains the directory meta information.
 # This does not need to be literally "README.yaml". It just needs to not clash with other
-# filename in the directory that you are processing. Example, if you don't want to use
+# filenames in the directory that you are processing. Example, if you don't want to use
 # README.yaml then you might use CATALOG.yaml.
 readme='README.yaml'
+
+# Users provide the content for the README.yaml files and the data ends up on a 
+# web page. So for security there is a set of characters that will be replaced.
+# This is a dictionary. For the key specify the single character to be replaced,
+# and for its value specify its replacement character. This can be None.
+# This can be printed as a string with:
+# print('Disllowed characters are: ', ' '.join(deny_list.keys()))
+deny_list = {
+    '<':'&lt;',
+    '>':'&gt;',
+    '{':'',
+    '}':'',
+    '(':'',
+    ')':'',
+    ';':'' }
 
 # The version string will be automatically updated by the install script from the git repo.
 # We use Semantic Versioning https://semver.org/spec/v2.0.0.html
@@ -53,12 +68,12 @@ import argparse, os, sys, copy
 import yaml, datetime
 
 def parse_args():
-    ''' 
+    '''
     There is one mandatory arg (a directory) and no optional args.
     '''
 
     parser = argparse.ArgumentParser( \
-        description='Program to catalog all %s docs under a directory.' % readme)
+        description='Program to catalog %s docs under a directory.' % readme)
     parser.add_argument('directory', help='The directory to catalog.')
     args = parser.parse_args()
     return args
@@ -124,34 +139,20 @@ def parse_readmes(found):
 
     return data
 
-def sanitise_data(data):
+def sanitise_data(data, deny_list):
     '''
     Users provide the content for the README.yaml files, these in turn are processed,
     and the data ends up on a web page. There is potential here for misuse. We already
     use safe_load only, which just loads subset of the YAML language safely, but users
     could still insert javascript into the YAML files. Here we look for several chars
     that might indicate javascript content and replace or strip them out. This might
-    cause some inconvenience to users.
+    cause some inconvenience to users. They are set in the "deny_list.
     '''
-
-    # The set of characters to be replaced needs to be a dictionary.
-    # For the key specify the single character to be replaced, and
-    # for its value specify its replacement character. This can be None.
-    # This can be printed as a string with:
-    # print('Disllowed characters are: ', ' '.join(deny_list.keys()))
-    deny_list = {
-        '<':'&lt;',
-        '>':'&gt;',
-        '{':'',
-        '}':'',
-        '(':'',
-        ')':'',
-        ';':'' }
 
     warnings = set()
 
     # str.maketrans takes a dictionary. For the key specify the single character
-    # to be replaced, and for its value specify its replacement. 
+    # to be replaced, and for its value specify its replacement.
     # It returns a translation table usable for str.translate().
     trans_table = str.maketrans(deny_list)
 
@@ -196,7 +197,7 @@ def sanitise_data(data):
 
         if sanitised:
             data[directory] = doc
-   
+
     return (data, warnings)
 
 def get_metadata(data):
@@ -232,7 +233,7 @@ def print_metadata(metadata):
     print('')
     [print(' -', item) for item in sorted(metadata)]
 
-def check_metadata(data, metadata, warnings):
+def check_metadata(data, metadata, warnings, deny_list):
     '''
     Check if any READMEs are missing any metadata values or
     if any keys or values contain disallowed characters.
@@ -240,6 +241,7 @@ def check_metadata(data, metadata, warnings):
 
     passed = True
     newline = False
+    title_printed = False
 
     for directory in data.keys():
         doc = data[directory]
@@ -248,7 +250,8 @@ def check_metadata(data, metadata, warnings):
             # Print a newline just once, it's needed at the start of the Markdown list.
             if not newline:
                 print('\n## Metadata Warnings')
-                print('\nChecking each %s file against the metadata list above ... ' % readme)
+                title_printed = True
+                print('\nThe following %s files had different metadata to the list above ... ' % readme)
                 print('\n', end='')
                 newline = True
 
@@ -268,16 +271,20 @@ def check_metadata(data, metadata, warnings):
             #print([str(item) for item in (metadata - this_set)])
 
             passed = False
-
     if passed:
-        print('\nChecking each %s file against the metadata list above ... OK' % readme)
+        # Note the 4 spaces at the end cause Markdown to insert a HTML <BR>.
+        print('\nChecking each %s file against the metadata list above ... passed OK.    ' % readme)
 
     if len(warnings):
-        print('\nChecking each README.yaml file for disallowed characters ...')
-        #print(' '.join(deny_list.keys()))
+        if not title_printed:
+            print('\n## Metadata Warnings')
+        print('\nThe following %s files contained at least one of the disallowed characters:' % readme)
+        print(' '.join(deny_list.keys()))
         print('')
         [print(' -', item) for item in warnings]
-    
+    else:
+        print('Checking each %s file for disallowed characters ... passed OK.' % readme)
+
 def create_markdown_header(timenow):
     '''
     Valid Markdown docs have some metadata at the top. Set that here.
@@ -293,7 +300,7 @@ date: %s
 ---''' % ('Data Directory Cataloger', sys.argv[0], version, timenow)
 
     print(metadata)
-    
+ 
 def create_markdown_footer(version, timenow):
     '''
     Stuff to be printed at the end of each page.
@@ -396,7 +403,7 @@ def main():
     data = parse_readmes(found)
 
     # Sanitise the data as this is user input.
-    (data, warnings) = sanitise_data(data)
+    (data, warnings) = sanitise_data(data, deny_list)
 
     print('A summary of the metadata in these files follows.')
     # Place in this list the keys that you wish to print out.
@@ -408,7 +415,7 @@ def main():
     print_metadata(metadata)
 
     # Check the metadata in these READMEs for consistency.
-    check_metadata(data, metadata, warnings)
+    check_metadata(data, metadata, warnings, deny_list)
 
     create_markdown_footer(version, timenow)
 
