@@ -32,9 +32,9 @@ If you wish to create a MkDocs site then you will meed to install the `mkdocs` m
 and perhaps a module for whatever theme you wish to use. For instance I have the 
 following mkdocs modules installed:
 
-    mkdocs==1.3.0
+    mkdocs==1.3.1
     mkdocs-macros-plugin==0.7.0
-    mkdocs-material==8.2.11
+    mkdocs-material==8.4.2
 
 It is best to install these into a Python virtual environment which can be sourced
 before running the programs. See the `update_mkdocs_site.sh` as an example.
