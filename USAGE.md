@@ -86,7 +86,7 @@ example `mkdocs.yml` file.
 
 The "**Summary**" section of the Markdown document will summarize *some* of the metadata fields.
 This will always show the *Directory* that each README.yaml file was found in. 
-Not all README metadata field will be shown. We show just the fields that are likely be
+Not all README metadata fields will be shown. We show just the fields that are likely be
 useful to users. You can add other metadata fields if you wish by editing the program,
 see `columns = ['Title', 'Description', 'Data Manager']`.
 
