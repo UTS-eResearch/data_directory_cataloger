@@ -300,7 +300,7 @@ date: %s
 ---''' % ('Data Directory Cataloger', sys.argv[0], version, timenow)
 
     print(metadata)
- 
+
 def create_markdown_footer(version, timenow):
     '''
     Stuff to be printed at the end of each page.
