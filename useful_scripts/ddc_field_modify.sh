@@ -1,15 +1,20 @@
 #!/bin/bash
 
 # Modify a line in all README.yaml files in the immediate subdirectories.
+#
 # Usage:
-# 1. Change to the directory above the immediate subdirectories.
-# 2. Run this script: full_path_to/ddc_field_modify.sh
+# 1. Copy this script to your own directory and edit the "before" and "after" fields to suit.
+# 2. Change to the directory above the immediate subdirectories.
+# 3. Run this script: /full_path_to/ddc_field_modify.sh
 
 # Set the variables "before" and "after" to the full field "name: value"
 # that you wish to be modified.
 before='Earliest possible disposal date: 2024'
 after='Earliest possible disposal date: 2026'
 
+# You can modify the maxdepth depth to suit.
+# Note: the mindepth is to ensure you don't include the README.yaml
+# in this directory.
 files=$(find . -mindepth 2 -maxdepth 2 -name README.yaml)
 for f in $files; do
     changes=''
