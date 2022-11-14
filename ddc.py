@@ -304,8 +304,9 @@ date: %s
 def create_markdown_footer(version, timenow):
     '''
     Stuff to be printed at the end of each page.
+    The spaces at the end of the first print ensure a newline in the HTML.
     '''
-    print('\nCreated by DDC version %s.' % version)
+    print('\nCreated by DDC version %s.     ' % version)
     print('This page last updated on %s' % timenow)
 
 def create_markdown_table(columns, data):
@@ -374,7 +375,7 @@ def main():
         sys.exit()
 
     # Get the time and todays date.
-    timenow = datetime.datetime.now().strftime('%Y-%m-%d at %I:%M %p')
+    timenow = datetime.datetime.now().strftime('%a, %d %b %Y at %I:%M %p')
 
     create_markdown_header(timenow)
     print('# Directory `%s`' % topdir)
