@@ -307,7 +307,7 @@ def create_markdown_footer(version, timenow):
     The spaces at the end of the first print ensure a newline in the HTML.
     '''
     print('\nCreated by DDC version %s.     ' % version)
-    print('This page last updated on %s' % timenow)
+    print('This page was updated on %s' % timenow)
 
 def create_markdown_table(columns, data):
     '''
