@@ -2,18 +2,18 @@
 
 '''
 This creates README.yaml files in all the first level subdirectories under
-a top level directory. Existing README.yaml files are not overwritten.
+a top-level directory. Existing README.yaml files are not overwritten.
 
 Usage:
 
-This program just takes one mandatory arg, the top level directory path.
+This program just takes one mandatory arg, the top-level directory path.
 This must be the first argument.
 The user can also supply a second arg; either "-t" or "--test".
 If this is supplied no README.yaml files will actually be written.
 
 The output is a list of the README.yaml files found and/or created.
 
-    path_to/write_readmes.py top_directory [-t]
+    path_to/write_readmes.py top_directory [-t | --test]
 
 To change the contents of the README.yaml you will need to edit this script.
 
@@ -45,7 +45,7 @@ def usage(msg=None):
 
 def create_readmes(topdir, doc=readme_default, test=False):
     '''
-    Given a top level directory find the top level subdirectories. If there
+    Given a top-level directory find the top-level subdirectories. If there
     is a README.yaml then do not replace it, if there is no README.yaml then
     create one.
     '''
@@ -85,17 +85,14 @@ def create_readmes(topdir, doc=readme_default, test=False):
 
 def main():
     '''
-    ./prog 
-    ./prog dir 
-    ./prog dir template
-    ./prog dir template -t
+    Write multiple README.yaml files into a top-level directory.
     '''
 
     test = False
 
     # Process the args. I do not like argparse.
     if len(sys.argv) < 2:
-        usage('Error: You need to specify a top level directory. Exiting')
+        usage('Error: You need to specify a top-level directory. Exiting')
     elif len(sys.argv) == 2:
         topdir = sys.argv[1]
         print('Processing %s ...' % topdir)
