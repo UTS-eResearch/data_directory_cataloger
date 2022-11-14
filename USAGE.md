@@ -40,9 +40,9 @@ The README.yaml should be in StrictYAML format (https://github.com/crdoconnor/st
 This short script can save a lot of time by writing a README.yaml
 file into each of the immediate subdirectories of a top level directory.
 The text of the README.yaml file that will be written is in the script. 
-You need to edit it to change the text.
+You need to edit it to change the text. Read the script.
 
-    $ ./write_readmes.py top_level-directory
+    $ ./write_readmes.py top_level-directory [-t | --test]
 
 ## How to run the DDC Program
 
