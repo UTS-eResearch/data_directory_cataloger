@@ -120,11 +120,17 @@ def parse_readmes(found):
                 # Note here, use safe_load() and not load()! Do not trust user input!
                 doc = yaml.safe_load(stream)
             except yaml.YAMLError as e:
+                # Although the error (e) is available here do not send it to stdout
+                # as stdout becomes the web page that is displayed to a user. That
+                # could be a security problem. Just output the path to the README.
                 print('')
-                print('<span style="color:red">')
-                print('Error in reading YAML file: ', e)
+                print('<span style="color:red;" >')
+                print('Error in reading YAML file: ', os.path.join(dir, readme), '<br>')
                 print('</span>')
                 print('')
+                # And we set an empty dictionary for this directories "doc".
+                # This is the safest thing to do.
+                doc = {}
 
         # Debugging lines
         #print('---------------------------')
