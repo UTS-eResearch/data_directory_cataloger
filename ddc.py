@@ -160,7 +160,7 @@ def sanitise_data(data, deny_list):
         # We don't need to check the keys in the data dictionary as they
         # are the directory paths, found and entered by this program.
         # The values in the data dictionary are the YAML docs, each one being a
-        # dictionary. We have to check theirs keys and values.
+        # dictionary. We have to check their keys and values.
 
         doc = data[directory]  # Each doc is a single row in the Markdown table.
         sanitised = False
