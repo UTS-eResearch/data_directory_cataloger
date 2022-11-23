@@ -14,7 +14,7 @@
 
 # Set the full path to the directory where you wish to install the two DDC
 # programs here. Do not add any trailing / on the end.
-dest='/opt/eresearch/bin'
+dest='/opt/eresearch/ddc/bin'
 
 # Nothing else below here needs to be changed.
 
