@@ -13,6 +13,7 @@ This contains example scripts for a High Performance Computer cluster.
 * [Adding a Field](#adding-a-field)
 * [Removing a Field](#removing-a-field)
 * [Modifying a Field](#modifying-a-field)
+* [Disallowed Characters](#disallowed-characters)
 
 ## What a README.yaml Looks Like
 
