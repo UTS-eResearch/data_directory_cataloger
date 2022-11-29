@@ -265,3 +265,17 @@ Make a backup as shown above, then run the script.
 
 You can use the example find commands above to look at the READMEs before and after the change.
 
+## Disallowed Characters
+
+There are some characters that should not include in the README.yaml files.
+These characters are: `<  >  {  }  (  )  ;`
+If those characters are included then some of those characters may be removed
+from the text. The right hand side "Table of contents" for that page will also
+show a link "Metadata Warnings" and the bottom of the page will show:
+
+> Metadata Warnings    
+> The following README.yaml files contained at least one of the disallowed characters: < > { } ( ) ;
+
+This might be a bit inconvenient but it helps to ensure the security of users
+browsing the site.
+
