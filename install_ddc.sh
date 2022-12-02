@@ -12,7 +12,7 @@
 #
 #   $ sudo ./install_ddc.sh
 
-# Set the full path to the directory where you wish to install the two DDC
+# Set the full path to the directory where you wish to install the DDC
 # programs here. Do not add any trailing / on the end.
 dest='/opt/eresearch/ddc/bin'
 
@@ -57,17 +57,11 @@ echo "Install or Update the Data Directory Cataloger"
 echo "----------------------------------------------"
 echo ""
 
-if [ ! -d $dest ]; then
-    echo "The directory $dest does not exist. "
-    echo "Exiting."
-    exit 0
-fi
-
 # Get the current git version.
 get_version
 
 # Check user really wants to install.
-echo "This script will install the two DDC programs to ${dest}/"
+echo "This script will install the DDC programs to ${dest}/"
 echo "The version being installed is $version_string"
 
 read -r -p "Type \"y\" to install. Any other key will exit: " REPLY
@@ -84,21 +78,21 @@ if [ ! -d $dest ]; then
         echo "Could not create directory $dest"
         echo "Perhaps you need to use sudo. Exiting."
         exit 0
-    fi            
+    fi
 fi
 
 # Backup any existing ddc.py program and rename it with todays date.
 # But once todays backup is created, don't overwrite it again.
 TODAY=$(date "+%Y.%m.%d")   # Todays date, 2013.12.26
 if [ -f ${dest}/ddc.py ] && [ ! -f ${dest}/ddc_${TODAY}.py ]; then
-    echo "Copying ddc.py to backup."        
+    echo "Copying ddc.py to backup."
     cp ${dest}/ddc.py ${dest}/ddc_${TODAY}.py
     if [ $? -ne 0 ]; then
         echo "Could not create backup."
         echo "Perhaps you need to use sudo. Exiting."
         exit 0
-    fi            
-fi        
+    fi
+fi
 
 # Copy the programs to the destination.
 cat ddc.py | sed "s/VERSION_STRING/$version_string/" > ${dest}/ddc.py
