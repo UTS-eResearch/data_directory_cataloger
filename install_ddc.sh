@@ -102,5 +102,5 @@ fi
 
 # Copy the programs to the destination.
 cat ddc.py | sed "s/VERSION_STRING/$version_string/" > ${dest}/ddc.py
-cp write_readmes.py ${dest}/
+cp useful_scripts/* ${dest}/
 
