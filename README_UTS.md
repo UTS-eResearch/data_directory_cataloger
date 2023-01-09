@@ -4,7 +4,7 @@ For the UTS setup of the Data Directory Cataloger there are several files that
 are not checked into this repository.
 
 These files are under the installation directory.
-The configuration files for the MkDocs environments for the 
+They are the configuration files for the MkDocs environments for the 
 AIMI, C3, eResearch and RSG groups:
 
     mkdocs_aimi.yml
@@ -13,7 +13,7 @@ AIMI, C3, eResearch and RSG groups:
     mkdocs_rsg.yml
 
 These files are also under the installation directory.
-The home pages for the MkDocs environments for the AIMI, C3, eResearch and RSG groups:
+They are the home pages for the MkDocs environments for the AIMI, C3, eResearch and RSG groups:
 
     index_aimi.md
     index_c3.md
