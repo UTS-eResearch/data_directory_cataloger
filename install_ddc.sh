@@ -26,17 +26,19 @@ function get_version {
     # If this repo is not at a tagged release then we wish to know the exact
     # patch that a user might be using so use the long "git describe" string
     # like 2.0.0-6-g382c9e0.
+    #
     # The command "git describe" string format is:
     #   'tag' - 'number of commits' - 'abbreviated commit name'
-    # e.g. git describe v2.0.0 --long
-    #      v2.0.0-0-g7ef3b13  <== The middle number is zero.
     #
-    # ie.g. git describe --long
-    #      v2.0.0-6-g382c9e0  <== The middle number is not zero.
+    # e.g. git describe 2.0.0 --long
+    #      2.0.0-0-g7ef3b13  <== The middle number is zero.
+    #
+    # e.g. git describe --long
+    #      2.0.0-6-g382c9e0  <== The middle number is not zero.
     #
     description=$(git describe --long)
-    version_num=$(echo $description | cut -d '-' -f1)  # e.g. v2.0.0
-    num_commits=$(echo $description | cut -d '-' -f2)  # e.g. 71
+    version_num=$(echo $description | cut -d '-' -f1)  # e.g. 2.0.0
+    num_commits=$(echo $description | cut -d '-' -f2)  # e.g. 1
     commit_hash=$(echo $description | cut -d '-' -f3)  # e.g. g1d02627
     if [ $num_commits -eq 0 ]; then
         # This is a tagged release.
