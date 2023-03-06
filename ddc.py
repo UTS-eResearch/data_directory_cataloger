@@ -69,12 +69,20 @@ import yaml, datetime
 
 def parse_args():
     '''
-    There is one mandatory arg (a directory) and no optional args.
+    There is one mandatory positional arg (a directory) plus
+    an optional arg to display the program version.
     '''
 
     parser = argparse.ArgumentParser( \
         description='Program to catalog %s docs under a directory.' % readme)
+
+    # Add the positional arg, being the input directory required.
     parser.add_argument('directory', help='The directory to catalog.')
+
+    # Add an optional arg to show the programs version number.
+    parser.add_argument('-v', '--version', action='version', \
+        version='This is %(prog)s version {}'.format(version))
+
     args = parser.parse_args()
     return args
 
