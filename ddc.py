@@ -374,7 +374,7 @@ def main():
     args = parse_args()
     topdir = args.directory
 
-    # This arg shoud be a directory.
+    # This arg should be a directory.
     if not os.path.isdir(topdir):
         print('Error: you must supply a directory, %s is not a directory.' % topdir)
         print('For help run: %s -h' % sys.argv[0])
