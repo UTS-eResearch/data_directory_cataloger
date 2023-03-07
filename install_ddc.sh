@@ -18,8 +18,26 @@ dest='/opt/eresearch/ddc/bin'
 
 # Nothing else below here needs to be changed.
 
-function get_version {
-    # This stores the current git version in the variable "version_string".
+function get_installed_version {
+    # This checks if the user already has an installed version of DDC
+    # and if so gets the version of this.
+    # If the program is not installed then installed_version is set
+    # to an empty string.
+    if [ -f ${dest}/ddc.py ]; then
+        # A grep will return something like this:
+        # version = "1.3.0 + 5 (gbb38009)"
+        installed_version=$(grep 'version = ' /opt/eresearch/ddc/bin/ddc.py)
+        # Strip the text 'version = '.
+        installed_version=${installed_version#version = }
+        # Strip the leading and training quotes.
+        installed_version=${installed_version//\"}
+    else
+        installed_version=''
+    fi
+}
+
+function get_git_version {
+    # This gets the current git version string.
     #
     # If this repo is checked out at a tagged release version then just
     # use the tag number only for the displayed version, like 2.0.0.
@@ -42,11 +60,42 @@ function get_version {
     commit_hash=$(echo $description | cut -d '-' -f3)  # e.g. g1d02627
     if [ $num_commits -eq 0 ]; then
         # This is a tagged release.
-        version_string=$version_num
+        git_version=$version_num
     else
         # This version has commits after the last tagged release.
-        version_string="$version_num + $num_commits ($commit_hash)"
+        git_version="$version_num + $num_commits ($commit_hash)"
     fi
+}
+
+function create_backup {
+    # Backup any existing ddc.py program and rename it with todays date.
+    # But once todays backup is created, don't overwrite it again.
+
+    TODAY=$(date "+%Y.%m.%d")   # Todays date, 2013.12.26
+    
+    if [ -f ${dest}/ddc.py ] && [ ! -f ${dest}/ddc_${TODAY}.py ]; then
+        echo "Copying ddc.py to backup."
+        cp ${dest}/ddc.py ${dest}/ddc_${TODAY}.py
+        if [ $? -ne 0 ]; then
+            echo "Could not create backup."
+            echo "Perhaps you need to use sudo. Exiting."
+            exit 1
+        else    
+            exit 0
+        fi
+    fi
+}
+
+function install_new_version {
+    # Copy the programs to the destination.
+    echo "Installing:"
+    echo "  ddc.py"
+    cat ddc.py | sed "s/VERSION_STRING/$git_version/" > ${dest}/ddc.py
+    for script in $(ls useful_scripts); do
+        echo "  $script"
+    done
+    cp useful_scripts/* ${dest}/
+    echo ""
 }
 
 ######
@@ -59,13 +108,24 @@ echo "Install or Update the Data Directory Cataloger"
 echo "----------------------------------------------"
 echo ""
 
-# Get the current git version.
-get_version
+# Get the current git version and if the user already has
+# a version installed get the version of that as well.
+get_git_version
+get_installed_version
 
 # Check user really wants to install.
 echo "This script will install the DDC programs to ${dest}/"
-echo "The version being installed is $version_string"
+echo "The programs to be installed are ddc.py and a few unversioned scripts."
+echo ""
 
+# Show the currently installed version number, if installed.
+if [ "$installed_version" != '' ]; then
+    echo "The currently installed version of ddc.py $installed_version"
+fi
+
+# Show the version number to be installed.
+echo "The version of ddc.py to be installed is $git_version"
+echo ""
 read -r -p "Type \"y\" to install. Any other key will exit: " REPLY
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     echo "exiting"
@@ -83,20 +143,6 @@ if [ ! -d $dest ]; then
     fi
 fi
 
-# Backup any existing ddc.py program and rename it with todays date.
-# But once todays backup is created, don't overwrite it again.
-TODAY=$(date "+%Y.%m.%d")   # Todays date, 2013.12.26
-if [ -f ${dest}/ddc.py ] && [ ! -f ${dest}/ddc_${TODAY}.py ]; then
-    echo "Copying ddc.py to backup."
-    cp ${dest}/ddc.py ${dest}/ddc_${TODAY}.py
-    if [ $? -ne 0 ]; then
-        echo "Could not create backup."
-        echo "Perhaps you need to use sudo. Exiting."
-        exit 0
-    fi
-fi
-
-# Copy the programs to the destination.
-cat ddc.py | sed "s/VERSION_STRING/$version_string/" > ${dest}/ddc.py
-cp useful_scripts/* ${dest}/
+create_backup
+install_new_version
 
