@@ -120,7 +120,11 @@ def parse_readmes(found):
     Takes a list of directories containing a README.yaml file and parses that README doc.
     Each doc's YAML structure is a dictionary.
     '''
+
+    # The "data" variable is a dictionary. It's keys will be the README.yaml
+    # file paths and the values are the YAML structures for that README.yaml
     data = {}
+
     for dir in found:
         file = os.path.join(dir, readme)
         with open(file, 'r') as stream:
@@ -393,10 +397,6 @@ def main():
 
     create_markdown_header(timenow)
     print('# Directory `%s`' % topdir)
-
-    # The "data" variable is a dictionary. It's keys will be the README.yaml
-    # file paths and the values are the YAML structures for that README.yaml
-    data = {}
 
     # Get all the READMEs under the top level directory.
     (found, missing) = get_readmes(topdir)
