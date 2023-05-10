@@ -381,6 +381,7 @@ def create_markdown_table(data):
         # and the value of this is the key in the data dictionary. But the actual
         # docs don't contain a value for this so we add this now.
         doc['Directory'] = directory
+
         l = []
         for col in columns:
             if col not in doc:
@@ -393,6 +394,10 @@ def create_markdown_table(data):
         print('| ', end='')
         print(' | '.join(l), end='')
         print(' |')
+
+        # We have to remove this entry as we don't want it to appear
+        # in the metadata list.
+        del doc['Directory']
 
 def main():
 
