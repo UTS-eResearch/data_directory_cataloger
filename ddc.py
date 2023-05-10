@@ -338,7 +338,7 @@ def create_markdown_footer(version, timenow):
     print('\nCreated by DDC version %s.     ' % version)
     print('This page was updated on %s' % timenow)
 
-def create_markdown_table(columns, data):
+def create_markdown_table(data):
     '''
     This takes a list of the keys to print out and the YAML data.
     The columns is a list and might be like this: ['Title', 'Description', 'Data Manager']
@@ -352,6 +352,9 @@ def create_markdown_table(columns, data):
     | examples/mpi           | Job Examples for MPI            | "                | Mike Lake |
     '''
 
+    # Place in this list the keys that you wish to print out.
+    # Capitalisation is important. They have to match the keys in your README YAML files.
+    columns = ['Title', 'Description', 'Data Manager']
     # The first column in the Markdown table will always be the directory of the README YAML
     # file and the subsequent colums will be the keys in found in the the README YAML file.
     columns.insert(0, 'Directory')
@@ -434,8 +437,7 @@ def main():
     print('A summary of the metadata in these files follows.')
     # Place in this list the keys that you wish to print out.
     # Capitalisation is important. They have to match the keys in your README YAML files.
-    columns = ['Title', 'Description', 'Data Manager']
-    create_markdown_table(columns, data)
+    create_markdown_table(data)
 
     metadata = get_metadata(data)
     print_metadata(metadata)
