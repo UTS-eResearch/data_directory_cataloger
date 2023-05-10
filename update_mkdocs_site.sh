@@ -7,6 +7,10 @@
 #
 # Usage: ./update_mkdocs_site.sh
 
+# These settings might be required depending on your terminal.
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+
 # Create directory docs if it does not exist.
 if [ ! -d docs ]; then mkdir docs; fi
 
