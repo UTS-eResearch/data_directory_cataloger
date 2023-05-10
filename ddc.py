@@ -66,6 +66,17 @@ DEBUG = False
 
 import argparse, os, sys, copy
 import yaml, datetime
+    
+def debug_data(data):
+    '''
+    Pretty print the data dictionary containing the YAML docs.
+    Just call this function at some point in the code.
+    '''
+    import pprint
+    print('DEBUGGING START ------------')
+    pprint.pprint(data)
+    print('DEBUGGING END ------------')
+
 
 def parse_args():
     '''
