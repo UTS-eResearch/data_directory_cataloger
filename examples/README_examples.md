@@ -112,7 +112,8 @@ Directory Cataloger to process several directories, creating a Markdown file
 for each directory, and combining those Markdown files into a single web site
 using the static website generator MkDocs. 
 
-The website is updated by the script `update_mkdocs_site.sh`.
+You can create a similar site by copying the script `update_site_example.sh`
+and editing it to suite your site.
 
 <p align="center" width="100%" style="text-align:center;">
 <img src="examples/mkdocs_screenshot.png" alt="MkDocs site example" width="80%" style="border: 1px solid black;"/>

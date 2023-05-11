@@ -37,7 +37,7 @@ following mkdocs modules installed:
     mkdocs-material==8.4.2
 
 It is best to install these into a Python virtual environment which can be sourced
-before running the programs. See the `update_mkdocs_site.sh` as an example.
+before running the programs. See the script `update_site_example.sh` as an example.
 
 ## License
 
