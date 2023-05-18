@@ -87,14 +87,18 @@ function create_backup {
 }
 
 function install_new_version {
-    # Copy the programs to the destination.
+
+    # Copy the main DDC program to the destination.
     echo "Installing:"
     echo "  ddc.py"
     cat ddc.py | sed "s/VERSION_STRING/$git_version/" > ${dest}/ddc.py
-    for script in $(ls useful_scripts); do
+
+    # Copy the useful scripts to the destination.
+    for script in ddc_field_add.sh ddc_field_modify.sh ddc_field_remove.sh; do
         echo "  $script"
+        cp useful_scripts/$script ${dest}/
+        chmod 644 ${dest}/$script
     done
-    cp useful_scripts/* ${dest}/
     echo ""
 }
 
