@@ -93,7 +93,7 @@ function install_new_version {
     echo "  ddc.py"
     cat ddc.py | sed "s/VERSION_STRING/$git_version/" > ${dest}/ddc.py
 
-    # Copy the useful scripts to the destination.
+    # Copy useful scripts to the destination.
     # Users should not run these from the destination. They should copy 
     # them to their own directory, edit to suit, then run their own copy. 
     # So we set them here as non executable.
@@ -102,6 +102,14 @@ function install_new_version {
         cp useful_scripts/$script ${dest}/
         chmod 644 ${dest}/$script
     done
+
+    # Allow any user to run ddc.py and write_readmes.py.
+    # Because ddc.py only writes to stdout and write_readmes.py will not overwrite
+    # existing READMEs its safe for those with write access to those directories
+    # to run this.
+    cp useful_scripts/write_readmes.py ${dest}
+    chmod 755 ${dest}/write_readmes.py
+    chmod 755 ${dest}/ddc.py
     echo ""
 }
 
