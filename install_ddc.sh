@@ -94,6 +94,9 @@ function install_new_version {
     cat ddc.py | sed "s/VERSION_STRING/$git_version/" > ${dest}/ddc.py
 
     # Copy the useful scripts to the destination.
+    # Users should not run these from the destination. They should copy 
+    # them to their own directory, edit to suit, then run their own copy. 
+    # So we set them here as non executable.
     for script in ddc_field_add.sh ddc_field_modify.sh ddc_field_remove.sh; do
         echo "  $script"
         cp useful_scripts/$script ${dest}/
