@@ -26,7 +26,7 @@ See the [Examples Readme](examples/README_examples.md) for a example HTML page a
 ## Requirements
 
 Python 3.6.8 or later with PyYAML 6.0 is required for the basic `ddc.py` program.
-The `write_readmes.py` program does not require any extra Python modes.
+The `write_readmes.py` program does not require any extra Python modules.
 
 If you wish to create a MkDocs site then you will meed to install the `mkdocs` module
 and perhaps a module for whatever theme you wish to use. For instance I have the 
