@@ -45,9 +45,9 @@ def usage(msg=None):
 
 def create_readmes(topdir, doc=readme_default, test=False):
     '''
-    Given a top-level directory find the top-level subdirectories. If there
-    is a README.yaml then do not replace it, if there is no README.yaml then
-    create one.
+    Given a top-level directory find the first level subdirectories. 
+    If there is a README.yaml in a subdirectory, then do not replace it,
+    if there is no README.yaml then create one.
     '''
 
     found = [] # List of paths for found READMEs.
