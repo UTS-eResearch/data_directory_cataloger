@@ -164,7 +164,8 @@ def parse_readmes(found):
         #print(yaml.dump(doc, default_flow_style=False))
 
         # Add this YAML doc to the data dictionary with the directory path as the key.
-        data[dir] = doc
+        if doc is not None:
+            data[dir] = doc
 
     return data
 
