@@ -1,3 +1,7 @@
+---
+title: Usage
+---
+
 # Detailed Usage
 
 This covers some details on how you would use the Data Directory Cataloger to manage
