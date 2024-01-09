@@ -3,7 +3,14 @@
 For the UTS setup of the Data Directory Cataloger there are several files that
 are not checked into this repository.
 
+In this directory there is:
+
+    install_ddc_uts.sh
+    uts_get_ignored_scripts.sh
+
 The following files can be found under the "uts_backups" directory.
+They can be kept in sync with the canonical ones on the HPC by changing into that 
+directory running the script `rsync_from_opt.sh`. 
 
 The configuration files for the MkDocs environments for the various groups:
 
