@@ -273,6 +273,8 @@ def check_metadata(data, metadata, warnings, deny_list):
     newline = False
     title_printed = False
 
+    # First check if all of the README.yaml files all have the same metadata fields.
+    # If any of them are missing a metadata field set passed to False.
     for directory in data.keys():
         doc = data[directory]
         this_set = set(doc.keys())
@@ -306,6 +308,8 @@ def check_metadata(data, metadata, warnings, deny_list):
         # Note the 4 spaces at the end cause Markdown to insert a HTML <BR>.
         print('\nChecking each %s file against the metadata list above ... passed OK.    ' % readme)
 
+    # Second, check if there are any warnings from the sanitise_data function.
+    # If so print the name of the file that contains the disallowed data character.
     if len(warnings):
         if not title_printed:
             print('\n## Metadata Warnings')
