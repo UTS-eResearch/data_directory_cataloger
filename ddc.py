@@ -318,7 +318,7 @@ def check_metadata(data, metadata, warnings, deny_list):
         print('')
         [print(' -', item) for item in warnings]
     else:
-        print('Checking each %s file for disallowed characters ... passed OK.' % readme)
+        print('\nChecking each %s file for disallowed characters ... passed OK.' % readme)
 
 def create_markdown_header(timenow):
     '''
