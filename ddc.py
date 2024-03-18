@@ -301,6 +301,7 @@ def check_metadata(data, metadata, warnings, deny_list):
             #print([str(item) for item in (metadata - this_set)])
 
             passed = False
+
     if passed:
         # Note the 4 spaces at the end cause Markdown to insert a HTML <BR>.
         print('\nChecking each %s file against the metadata list above ... passed OK.    ' % readme)
