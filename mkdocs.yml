@@ -5,7 +5,7 @@
 
 site_name: "Data Directory Catalog"
 site_url: "http://localhost"
-repo_url: https://code.research.uts.edu.au/950654/data_dir_cataloger
+repo_url: https://github.com/UTS-eResearch/data_directory_cataloger
 use_directory_urls: true
 
 markdown_extensions:
